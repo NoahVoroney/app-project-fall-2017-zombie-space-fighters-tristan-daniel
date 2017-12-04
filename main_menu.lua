@@ -37,10 +37,13 @@ local bkg_image
 local playButton
 local creditsButton
 local instructionsButton
-
+local MenuSound = audio.loadSound("Sounds/MainMenuMusic.mp3")
+local MenuSoundChannel
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
+
+
 
 -- Creating Transition Function to Credits Page
 local function CreditsTransition( )       
@@ -104,7 +107,8 @@ function scene:create( event )
             overFile = "Images/Start Button Pressed.png",
 
             -- When the button is released, call the Level1 screen transition function
-            onRelease = Level1ScreenTransition          
+            onRelease = Level1ScreenTransition  
+
         } )
 
     -----------------------------------------------------------------------------------------
@@ -144,7 +148,7 @@ function scene:create( event )
     -- Associating button widgets with this scene
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
-   
+    
     
     -- INSERT INSTRUCTIONS BUTTON INTO SCENE GROUP
     sceneGroup:insert( instructionsButton )
@@ -156,7 +160,7 @@ end -- function scene:create( event )
 
 -- The function called when the scene is issued to appear on screen
 function scene:show( event )
-
+    MenuSoundChannel = audio.play(MenuSound )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
