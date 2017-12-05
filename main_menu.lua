@@ -160,7 +160,7 @@ end -- function scene:create( event )
 
 -- The function called when the scene is issued to appear on screen
 function scene:show( event )
-    MenuSoundChannel = audio.play(MenuSound )
+   
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
@@ -178,7 +178,8 @@ function scene:show( event )
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
-    elseif ( phase == "did" ) then       
+    elseif ( phase == "did" ) then   
+        MenuSoundChannel = audio.play(MenuSound )    
         
 
     end
@@ -208,6 +209,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+        audio.stop(MenuSoundChannel)
     end
 
 end -- function scene:hide( event )

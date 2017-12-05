@@ -89,6 +89,8 @@ local function TouchListenerWrongAnswer(touch)
     
     if (touch.phase == "ended") then
         
+
+
         BackToLevel1( )
         
         
@@ -213,7 +215,7 @@ local function PositionAnswers()
     elseif (answerPosition == 4) then
 
         answerText.x = X2
-        answerText.y = Y1
+        answerText.y = Y2
             
         wrongText1.x = X1
         wrongText1.y = Y2

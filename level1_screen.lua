@@ -86,6 +86,9 @@ local questionsAnswered = 0
 local popSound = audio.loadSound( "Sounds/Pop.mp3")
 local popSoundChannel
 
+local L1Music = audio.loadSound( "Sounds/L1Music.mp3")
+local L1SoundChannel
+
 local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
@@ -676,6 +679,8 @@ function scene:show( event )
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
 
+        L1SoundChannel = audio.play(L1Music )  
+
         numLives = 3
         questionsAnswered = 0
 
@@ -723,7 +728,7 @@ function scene:hide( event )
         -- Called immediately after scene goes off screen.
         RemoveCollisionListeners()
         RemovePhysicsBodies()
-
+        audio.stop(L1SoundChannel)
         physics.stop()
         RemoveArrowEventListeners()
         RemoveRuntimeListeners()
