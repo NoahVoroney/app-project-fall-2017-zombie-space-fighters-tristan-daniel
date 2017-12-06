@@ -513,7 +513,7 @@ function scene:create( event )
     door2.myName = "door2"
 
     -- Insert the Hearts
-    heart1 = display.newImageRect("Images/heart.png", 80, 80)
+    heart1 = display.newImageRect("Images/Lives.png", 80, 80)
     heart1.x = 50
     heart1.y = 50
     heart1.isVisible = true
@@ -521,7 +521,7 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( heart1 )
 
-    heart2 = display.newImageRect("Images/heart.png", 80, 80)
+    heart2 = display.newImageRect("Images/Lives.png", 80, 80)
     heart2.x = 130
     heart2.y = 50
     heart2.isVisible = true
@@ -529,7 +529,7 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( heart2 )
 
-    heart3 = display.newImageRect("Images/heart.png", 80, 80)
+    heart3 = display.newImageRect("Images/Lives.png", 80, 80)
     heart3.x = 210
     heart3.y = 50
     heart3.isVisible = true
