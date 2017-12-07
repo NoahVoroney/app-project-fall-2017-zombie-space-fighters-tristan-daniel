@@ -39,17 +39,17 @@ local platform2
 local platform3
 local platform4
 
-local spikes1
-local spikes2
-local spikes3
+--local spikes1
+--local spikes2
+--local spikes3
 
 local spikes1platform
 local spikes2platform
 local spikes3platform
 
 
-local door
-local door2
+--local door
+--local door2
 local character
 
 local heart1
@@ -74,12 +74,12 @@ local floor
 local YouLose
 local YouWin
 
-local ball2
-local ball3
-local ball4
-local ball5
-local ball6
-local theBall
+local zombie2
+local zombie3
+--local zombie4
+--local zombie5
+--local zombie6
+--local theZombie
 
 local questionsAnswered = 0
 
@@ -180,12 +180,12 @@ local function ReplaceCharacter()
     AddRuntimeListeners()
 end
 
-local function MakeSoccerBallsVisible()
-    ball2.isVisible = true
-    ball3.isVisible = true
-    ball4.isVisible = true
-    ball5.isVisible = true
-    ball6.isVisible = true
+local function MakeZombiesVisible()
+    zombie2.isVisible = true
+    zombie3.isVisible = true
+--    zombie4.isVisible = true
+--    zombie5.isVisible = true
+--    zombie6.isVisible = true
 end
 
 local function MakeHeartsVisible()
@@ -204,140 +204,143 @@ local function Level2Transition( )
 
     --play you win audio
     youWinSoundChannel = audio.play(youWinSound)
+
+    --go to the main menu for now
+    composer.gotoScene( "main_menu" )
+
 end
 
 local function onCollision( self, event )
-    -- for testing purposes
+     --for testing purposes
     --print( event.target )        --the first object in the collision
     --print( event.other )         --the second object in the collision
     --print( event.selfElement )   --the element (number) of the first object which was hit in the collision
     --print( event.otherElement )  --the element (number) of the second object which was hit in the collision
     --print( event.target.myName .. ": collision began with " .. event.other.myName )
 
-    if ( event.phase == "began" ) then
+    --if ( event.phase == "began" ) then
 
         --Pop sound
-        popSoundChannel = audio.play(popSound)
+        --popSoundChannel = audio.play(popSound)
 
-        if  (event.target.myName == "spikes1") or 
-            (event.target.myName == "spikes2") or
-            (event.target.myName == "spikes3") then
+        --if  (event.target.myName == "spikes1") or 
+        --    (event.target.myName == "spikes2") or
+        --    (event.target.myName == "spikes3") then
 
             -- add sound effect here
-            popSoundChannel = audio.play(popSound)
+        --    popSoundChannel = audio.play(popSound)
             -- remove runtime listeners that move the character
-            RemoveArrowEventListeners()
-            RemoveRuntimeListeners()
+        --    RemoveArrowEventListeners()
+        --    RemoveRuntimeListeners()
 
             -- remove the character from the display
-            display.remove(character)
+        --    display.remove(character)
 
             -- decrease number of lives
-            numLives = numLives - 1
+        --    numLives = numLives - 1
 
 
-            if (numLives == 3) then
+        --    if (numLives == 3) then
                 -- update hearts
-                heart1.isVisible = true
-                heart2.isVisible = true
-                heart3.isVisible = true
-                timer.performWithDelay(200, ReplaceCharacter)
+        --        heart1.isVisible = true
+         --       heart2.isVisible = true
+         --       heart3.isVisible = true
+        --        timer.performWithDelay(200, ReplaceCharacter)
 
-            elseif (numLives == 2) then
+        --    elseif (numLives == 2) then
                 -- update hearts
-                heart1.isVisible = true
-                heart2.isVisible = true
-                heart3.isVisible = false
-                timer.performWithDelay(200, ReplaceCharacter)
+        --        heart1.isVisible = true
+        --        heart2.isVisible = true
+        --        heart3.isVisible = false
+        --       timer.performWithDelay(200, ReplaceCharacter)
 
 
-            elseif (numLives == 1) then
+        --    elseif (numLives == 1) then
                 -- update hearts
-                heart1.isVisible = true
-                heart2.isVisible = false
-                heart3.isVisible = false
-                timer.performWithDelay(200, ReplaceCharacter) 
+        --        heart1.isVisible = true
+        --        heart2.isVisible = false
+        --        heart3.isVisible = false
+        --        timer.performWithDelay(200, ReplaceCharacter) 
 
-            elseif (numLives == 0) then
+        --    elseif (numLives == 0) then
                 -- update hearts
-                heart1.isVisible = false
-                heart2.isVisible = false
-                heart3.isVisible = false
-                timer.performWithDelay(200, YouLoseTransition)
-            end
-        end
+        --        heart1.isVisible = false
+        --        heart2.isVisible = false
+        --        heart3.isVisible = false
+        --        timer.performWithDelay(200, YouLoseTransition)
+        --    end
+        --end
 
-        if  (event.target.myName == "ball2") or
-            (event.target.myName == "ball3") or
-            (event.target.myName == "ball4") or
-            (event.target.myName == "ball5") or
-            (event.target.myName == "ball6") then
-            -- get the ball that the user hit
-            theBall = event.target
+        if  (event.target.myName == "zombie2") or
+            (event.target.myName == "zombie3") then
+           -- (event.target.myName == "zombie4") or
+            --(event.target.myName == "zombie5") or
+            --(event.target.myName == "zombie6") then
+             --get the zombie that the user hit
+               theZombie = event.target
 
             -- stop the character from moving
-            motionx = 0
+               motionx = 0
 
             -- make the character invisible
-            character.isVisible = false
+               character.isVisible = false
 
             -- show overlay with math question
-            composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
+               composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
 
             -- Increment questions answered
-            questionsAnswered = questionsAnswered + 1
+               questionsAnswered = questionsAnswered + 1
         end
 
-        if (event.target.myName == "door2") then
+        --if (event.target.myName == "zombie3") then
             --check to see if the user has answered 5 questions
-            if questionsAnswered == 5 then
+            if (questionsAnswered == 2) then
                 Level2Transition( )
             end
-        end        
+        --end        
 
-    end
+    --end
 end
 
 
 local function AddCollisionListeners()
-    print ("***Called AddCollisionListeners")
-    -- if character collides with ball, onCollision will be called
-    spikes1.collision = onCollision
-    spikes1:addEventListener( "collision" )
-    spikes2.collision = onCollision
-    spikes2:addEventListener( "collision" )
-    spikes3.collision = onCollision
-    spikes3:addEventListener( "collision" )
+    --print ("***Called AddCollisionListeners")
+    --if character collides with ball, onCollision will be called
+    --spikes1.collision = onCollision
+    --spikes1:addEventListener( "collision" )
+    --spikes2.collision = onCollision
+    --spikes2:addEventListener( "collision" )
+    --spikes3.collision = onCollision
+    --spikes3:addEventListener( "collision" )
 
-    -- if character collides with ball, onCollision will be called    
-    ball2.collision = onCollision
-    ball2:addEventListener( "collision" )
-    ball3.collision = onCollision
-    ball3:addEventListener( "collision" )
-    ball4.collision = onCollision
-    ball4:addEventListener( "collision" )
-    ball5.collision = onCollision
-    ball5:addEventListener( "collision" )
-    ball6.collision = onCollision
-    ball6:addEventListener( "collision" )
-
-    door2.collision = onCollision
-    door2:addEventListener( "collision" )
+     --when character collides with zombie, onCollision will be called    
+        zombie2.collision = onCollision
+        zombie2:addEventListener( "collision" )
+        zombie3.collision = onCollision
+        zombie3:addEventListener( "collision" )
+       -- zombie4.collision = onCollision
+       -- zombie4:addEventListener( "collision" )
+       -- zombie5.collision = onCollision
+       -- zombie5:addEventListener( "collision" )
+      --  zombie6.collision = onCollision
+      --  zombie6:addEventListener( "collision" )
+   -- door2.collision = onCollision
+   -- door2:addEventListener( "collision" )
 end
 
 local function RemoveCollisionListeners()
-    print ("***Called RemoveCollisionListeners")
-    spikes1:removeEventListener( "collision" )
-    spikes2:removeEventListener( "collision" )
-    spikes3:removeEventListener( "collision" )
+    --print ("***Called RemoveCollisionListeners")
+    --spikes1:removeEventListener( "collision" )
+    --spikes2:removeEventListener( "collision" )
+   -- spikes3:removeEventListener( "collision" )
 
-    ball2:removeEventListener( "collision" )
-    ball3:removeEventListener( "collision" )
-    ball4:removeEventListener( "collision" )
-    ball5:removeEventListener( "collision" )
-    ball6:removeEventListener( "collision" )
+    zombie2:removeEventListener( "collision" )
+    zombie3:removeEventListener( "collision" )
+   -- zombie4:removeEventListener( "collision" )
+   -- zombie5:removeEventListener( "collision" )
+   -- zombie6:removeEventListener( "collision" )
 
-    door2:removeEventListener( "collision")
+   -- door2:removeEventListener( "collision")
 
 end
 
@@ -350,9 +353,9 @@ local function AddPhysicsBodies()
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
-    physics.addBody( spikes1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( spikes2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( spikes3, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
+    --physics.addBody( spikes1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    --physics.addBody( spikes2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    --physics.addBody( spikes3, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
 
     physics.addBody( spikes1platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( spikes2platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
@@ -363,13 +366,13 @@ local function AddPhysicsBodies()
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
 
-    physics.addBody(ball2, "static",  {density=0, friction=0, bounce=0} )
-    physics.addBody(ball3, "static",  {density=0, friction=0, bounce=0} )
-    physics.addBody(ball4, "static",  {density=0, friction=0, bounce=0} )
-    physics.addBody(ball5, "static",  {density=0, friction=0, bounce=0} )
-    physics.addBody(ball6, "static",  {density=0, friction=0, bounce=0} )
+    physics.addBody(zombie2, "static",  {density=0, friction=0, bounce=0} )
+    physics.addBody(zombie3, "static",  {density=0, friction=0, bounce=0} )
+   -- physics.addBody(zombie4, "static",  {density=0, friction=0, bounce=0} )
+    --physics.addBody(zombie5, "static",  {density=0, friction=0, bounce=0} )
+   -- physics.addBody(zombie6, "static",  {density=0, friction=0, bounce=0} )
 
-    physics.addBody(door2, "static", {density=1, friction=0.3, bounce=0.2})
+    --physics.addBody(door2, "static", {density=1, friction=0.3, bounce=0.2})
 
 end
 
@@ -379,9 +382,9 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform3)
     physics.removeBody(platform4)
 
-    physics.removeBody(spikes1)
-    physics.removeBody(spikes2)
-    physics.removeBody(spikes3)
+    --physics.removeBody(spikes1)
+    --physics.removeBody(spikes2)
+    --physics.removeBody(spikes3)
 
     physics.removeBody(spikes1platform)
     physics.removeBody(spikes2platform)
@@ -404,9 +407,9 @@ function ResumeGame()
     character.isVisible = true
     
     if (questionsAnswered > 0) then
-        if (theBall ~= nil) and (theBall.isBodyActive == true) then
-                physics.removeBody(theBall)
-                theBall.isVisible = false
+        if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
+                physics.removeBody(theZombie)
+                theZombie.isVisible = false
         end
     end
 
@@ -458,12 +461,12 @@ function scene:create( event )
         
     sceneGroup:insert( platform4 )
 
-    spikes1 = display.newImageRect("Images/Level-1Spikes1.png", 250, 50)
-    spikes1.x = display.contentWidth * 3 / 8
-    spikes1.y = display.contentHeight * 2.5 / 5
-    spikes1.myName = "spikes1"
+    --spikes1 = display.newImageRect("Images/Level-1Spikes1.png", 250, 50)
+    --spikes1.x = display.contentWidth * 3 / 8
+    --spikes1.y = display.contentHeight * 2.5 / 5
+    --spikes1.myName = "spikes1"
         
-    sceneGroup:insert( spikes1)
+    --sceneGroup:insert( spikes1)
 
     spikes1platform = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     spikes1platform.x = display.contentWidth * 3 / 8
@@ -471,12 +474,12 @@ function scene:create( event )
         
     sceneGroup:insert( spikes1platform)
 
-    spikes2 = display.newImageRect("Images/Level-1Spikes2.png", 150, 50)
-    spikes2.x = display.contentWidth * 6 / 8
-    spikes2.y = display.contentHeight * 2.5 / 5
-    spikes2.myName = "spikes2"
+    --spikes2 = display.newImageRect("Images/Level-1Spikes2.png", 150, 50)
+    --spikes2.x = display.contentWidth * 6 / 8
+    --spikes2.y = display.contentHeight * 2.5 / 5
+    --spikes2.myName = "spikes2"
         
-    sceneGroup:insert( spikes2)
+    --sceneGroup:insert( spikes2)
 
     spikes2platform = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     spikes2platform.x = display.contentWidth * 6 / 8
@@ -484,12 +487,12 @@ function scene:create( event )
         
     sceneGroup:insert( spikes2platform)
 
-    spikes3 = display.newImageRect("Images/Level-1Spikes3.png", 50, 150)
-    spikes3.x = display.contentWidth * 5.5 / 8
-    spikes3.y = display.contentHeight * 0.4 / 5
-    spikes3.myName = "spikes3"
+    --spikes3 = display.newImageRect("Images/Level-1Spikes3.png", 50, 150)
+    --spikes3.x = display.contentWidth * 5.5 / 8
+    --spikes3.y = display.contentHeight * 0.4 / 5
+    --spikes3.myName = "spikes3"
         
-    sceneGroup:insert( spikes3)
+    --sceneGroup:insert( spikes3)
 
     spikes3platform = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
     spikes3platform.x = display.contentWidth * 5.8 / 8
@@ -500,17 +503,17 @@ function scene:create( event )
    
 
     -- Insert the Door
-    door = display.newImageRect("Images/Level-1Door.png", display.contentWidth, display.contentHeight)
-    door.x = display.contentCenterX
-    door.y = display.contentCenterY
+    --door = display.newImageRect("Images/Level-1Door.png", display.contentWidth, display.contentHeight)
+   -- door.x = display.contentCenterX
+   -- door.y = display.contentCenterY
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( door )
+    --sceneGroup:insert( door )
 
     -- door 2
-    door2 = display.newRect(155, 650, 200, 200)
-    door2.isVisible = false
-    door2.myName = "door2"
+   -- door2 = display.newRect(155, 650, 200, 200)
+   -- door2.isVisible = false
+   -- door2.myName = "door2"
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
@@ -604,51 +607,51 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( YouWin )
 
-    --ball2
-    ball2 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball2.x = 610
-    ball2.y = 480
-    ball2.myName = "ball2"
+    --zombie2
+    zombie2 = display.newImageRect ("Images/Zombie.png", 70, 70)
+    zombie2.x = 610
+    zombie2.y = 480
+    zombie2.myName = "zombie2"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( ball2 )
+    sceneGroup:insert( zombie2 )
 
 
-    --ball3
-    ball3 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball3.x = 490
-    ball3.y = 170
-    ball3.myName = "ball3"
-
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( ball3 )
-
-    --ball4
-    ball4 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball4.x = 950
-    ball4.y = 140
-    ball4.myName = "ball4"
+    --zombie3
+    zombie3 = display.newImageRect ("Images/Zombie.png", 70, 70)
+    zombie3.x = 490
+    zombie3.y = 170
+    zombie3.myName = "zombie3"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( ball4 )
+    sceneGroup:insert( zombie3 )
 
-    --ball5
-    ball5 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball5.x = 750
-    ball5.y = 275
-    ball5.myName = "ball5"
-
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( ball5 )
-
-    --ball6
-    ball6 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball6.x = 400
-    ball6.y = 720
-    ball6.myName = "ball6"
+    --zombie4
+    --zombie4 = display.newImageRect ("Images/Zombie.png", 70, 70)
+   -- zombie4.x = 950
+   --zombie4.y = 140
+    --zombie4.myName = "zombie4"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( ball6 )
+   -- sceneGroup:insert( zombie4 )
+
+    --zombie5
+  --  zombie5 = display.newImageRect ("Images/Zombie.png", 70, 70)
+  --  zombie5.x = 750
+  --  zombie5.y = 275
+  --  zombie5.myName = "zombie5"
+
+    -- Insert objects into the scene group in order to ONLY be associated with this scene
+  --  sceneGroup:insert( zombie5 )
+
+    --zombie6
+  --  zombie6 = display.newImageRect ("Images/Zombie.png", 70, 70)
+  --  zombie6.x = 400
+  --  zombie6.y = 720
+  --  zombie6.myName = "zombie6"
+
+    -- Insert objects into the scene group in order to ONLY be associated with this scene
+  --  sceneGroup:insert( zombie6 )
 
 end --function scene:create( event )
 
@@ -684,8 +687,8 @@ function scene:show( event )
         numLives = 3
         questionsAnswered = 0
 
-        -- make all soccer balls visible
-        MakeSoccerBallsVisible()
+        -- make all zombies visible
+        MakeZombiesVisible()
 
         -- make all lives visible
         MakeHeartsVisible()
@@ -697,7 +700,7 @@ function scene:show( event )
         AddCollisionListeners()
 
         -- add arrow event listeners for buttons
-        --AddArrowEventListeners()
+        AddArrowEventListeners()
 
         -- create the character, add physics bodies and runtime listeners
         ReplaceCharacter()
