@@ -28,6 +28,12 @@ sceneName = "level1_screen"
 local scene = composer.newScene( sceneName )
 
 -----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+
+numLives = 3
+
+-----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
 
@@ -55,7 +61,6 @@ local character
 local heart1
 local heart2
 local heart3
-numLives = 3
 
 local rArrow 
 local lArrow
@@ -200,7 +205,6 @@ end
 
 local function Level2Transition( )
     composer.gotoScene( "you_win" )
-    audio.stop ( mmMusicChannel)
 
     --play you win audio
     youWinSoundChannel = audio.play(youWinSound)
@@ -439,12 +443,14 @@ function ResumeGame()
     -- make character visible again
     character.isVisible = true
     
-    if (questionsAnswered > 0) then
+    --if (questionsAnswered > 0) then
         if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
-                physics.removeBody(theZombie)
+                print ("***Removed theZombie " .. theZombie.myName)
                 theZombie.isVisible = false
+                physics.removeBody(theZombie)              
+                
         end
-    end
+    --end
 
 end
 
