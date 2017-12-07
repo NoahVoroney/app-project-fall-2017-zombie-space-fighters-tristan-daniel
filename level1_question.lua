@@ -60,6 +60,12 @@ local Y2 = display.contentHeight*5.5/7
 local userAnswer
 local textTouched = false
 
+numLives = 3
+_G.numLives = 3
+
+
+
+
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -88,7 +94,7 @@ local function TouchListenerWrongAnswer(touch)
     userAnswer = wrongText1.text
     
     if (touch.phase == "ended") then
-        
+        numLives = numLives - 1
 
 
         BackToLevel1( )
@@ -102,6 +108,7 @@ local function TouchListenerWrongAnswer2(touch)
     userAnswer = wrongText2.text
     
     if (touch.phase == "ended") then
+        numLives = numLives - 1
 
         BackToLevel1( )
         
@@ -112,6 +119,7 @@ local function TouchListenerWrongAnswer3(touch)
     userAnswer = wrongText3.text
     
     if (touch.phase == "ended") then
+        numLives = numLives - 1
 
         BackToLevel1( )
         
@@ -228,6 +236,8 @@ local function PositionAnswers()
             
     end
 end
+
+
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS

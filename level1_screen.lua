@@ -55,7 +55,7 @@ local character
 local heart1
 local heart2
 local heart3
-local numLives = 3
+numLives = 3
 
 local rArrow 
 local lArrow
@@ -292,8 +292,9 @@ local function onCollision( self, event )
                questionsAnswered = questionsAnswered + 1
         end
 
+
         --if (event.target.myName == "zombie3") then
-            --check to see if the user has answered 5 questions
+            --check to see if the user has answered 2 questions
             if (questionsAnswered == 2) then
                 Level2Transition( )
             end
@@ -302,6 +303,38 @@ local function onCollision( self, event )
     --end
 end
 
+
+local function lifeTaker()
+     if (numLives == 3) then
+                -- update hearts
+            heart1.isVisible = true
+            heart2.isVisible = true
+            heart3.isVisible = true
+            
+
+        elseif (numLives == 2) then
+                -- update hearts
+            heart1.isVisible = true
+            heart2.isVisible = true
+            heart3.isVisible = false
+            timer.performWithDelay(200, ReplaceCharacter)
+
+
+         elseif (numLives == 1) then
+                -- update hearts
+            heart1.isVisible = true
+            heart2.isVisible = false
+            heart3.isVisible = false
+            timer.performWithDelay(200, ReplaceCharacter) 
+
+        elseif (numLives == 0) then
+                -- update hearts
+            heart1.isVisible = false
+            heart2.isVisible = false
+            heart3.isVisible = false
+            timer.performWithDelay(200, YouLoseTransition)
+            end
+        end
 
 local function AddCollisionListeners()
     --print ("***Called AddCollisionListeners")
@@ -704,6 +737,8 @@ function scene:show( event )
 
         -- create the character, add physics bodies and runtime listeners
         ReplaceCharacter()
+        -- make the lives work
+        lifeTaker()
 
     end
 
