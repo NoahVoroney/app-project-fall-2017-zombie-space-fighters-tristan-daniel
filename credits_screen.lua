@@ -15,6 +15,8 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
 
+local creditMusic = audio.loadSound( "Sounds/creditMusic.mp3")
+local creditSoundChannel
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -120,6 +122,7 @@ function scene:show( event )
         -- Called when the scene is now on screen.
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
+        creditSoundChannel = audio.play( creditMusic ) 
     end
 
 end -- function scene:show( event )
@@ -147,6 +150,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+        audio.stop(creditSoundChannel)
     end
 
 end --function scene:hide( event )
