@@ -129,16 +129,16 @@ end
 
 
 --adding the event listeners 
-local function AddTextListeners ()
-    answerText:addEventListener( "touch", TouchListenerAnswer )
-    wrongText1:addEventListener( "touch", TouchListenerWrongAnswer)
-    wrongText2:addEventListener( "touch", TouchListenerWrongAnswer2)
-    wrongText3:addEventListener( "touch", TouchListenerWrongAnswer3)
+local function AddTextListeners()
+    answerText:addEventListener("touch", TouchListenerAnswer)
+    wrongText1:addEventListener("touch", TouchListenerWrongAnswer)
+    wrongText2:addEventListener("touch", TouchListenerWrongAnswer2)
+    wrongText3:addEventListener("touch", TouchListenerWrongAnswer3)
 end
 
 --removing the event listeners
 local function RemoveTextListeners()
-    answerText:removeEventListener( "touch", TouchListenerAnswer )
+    answerText:removeEventListener( "touch", TouchListenerAnswer)
     wrongText1:removeEventListener( "touch", TouchListenerWrongAnswer)
     wrongText2:removeEventListener( "touch", TouchListenerWrongAnswer2)
     wrongText3:removeEventListener( "touch", TouchListenerWrongAnswer3)
