@@ -98,9 +98,8 @@ local youWinSoundChannel
 
 -- When left arrow is touched, move character left
 local function left (touch)
-        motionx = -SPEED
-        character.xScale = -1
-
+  motionx = -SPEED
+  character.xScale = -1
 end
  
  
@@ -132,7 +131,7 @@ local function stop (event)
         motionx = 0
     end
 end
-
+-- Runtime:addEventListener("touch", stop )
 
 local function AddArrowEventListeners()
     rArrow:addEventListener("touch", right)
@@ -143,6 +142,7 @@ end
 local function RemoveArrowEventListeners()
     rArrow:removeEventListener("touch", right)
     uArrow:removeEventListener("touch", up)
+    lArrow:removeEventListener("touch", left)
 end
 
 local function AddRuntimeListeners()
@@ -200,14 +200,13 @@ end
 
 local function Level2Transition( )
     composer.gotoScene( "you_win" )
-    audio.stop ( mmMusicChannel)
+    --audio.stop ( mmMusicChannel)
 
     --play you win audio
-    youWinSoundChannel = audio.play(youWinSound)
+    --youWinSoundChannel = audio.play(youWinSound)
 
     --go to the main menu for now
     composer.gotoScene( "main_menu" )
-
 end
 
 local function onCollision( self, event )
@@ -295,9 +294,9 @@ local function onCollision( self, event )
 
         --if (event.target.myName == "zombie3") then
             --check to see if the user has answered 2 questions
-            if (questionsAnswered == 2) then
-                Level2Transition( )
-            end
+            --if (questionsAnswered == 2) then
+                --Level2Transition( )
+            --end
         --end        
 
     --end
@@ -305,20 +304,18 @@ end
 
 
 local function lifeTaker()
-     if (numLives == 3) then
+    if (numLives == 3) then
                 -- update hearts
             heart1.isVisible = true
             heart2.isVisible = true
             heart3.isVisible = true
             
-
         elseif (numLives == 2) then
                 -- update hearts
             heart1.isVisible = true
             heart2.isVisible = true
             heart3.isVisible = false
             timer.performWithDelay(200, ReplaceCharacter)
-
 
          elseif (numLives == 1) then
                 -- update hearts
@@ -333,8 +330,8 @@ local function lifeTaker()
             heart2.isVisible = false
             heart3.isVisible = false
             timer.performWithDelay(200, YouLoseTransition)
-            end
-        end
+    end
+end
 
 local function AddCollisionListeners()
     --print ("***Called AddCollisionListeners")

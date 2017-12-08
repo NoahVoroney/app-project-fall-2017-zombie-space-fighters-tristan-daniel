@@ -44,9 +44,9 @@ local wrongAnswer2
 local wrongAnswer3
 
 local answerText 
-local wrongAnswerText1
-local wrongAnswerText2
-local wrongAnswerText3
+local wrongText1
+local wrongText2
+local wrongText3
 
 local answerPosition = 1
 local bkg
@@ -79,14 +79,23 @@ end
 
 -----------------------------------------------------------------------------------------
 --checking to see if the user pressed the right answer and bring them back to level 1
+--local function TouchListenerAnswer(touch)
+--    userAnswer = answerText.text
+    
+--    if (touch.phase == "ended") then
+
+--        BackToLevel1( )
+    
+--    end
+--end    
+
 local function TouchListenerAnswer(touch)
     userAnswer = answerText.text
-    
+
     if (touch.phase == "ended") then
 
-        BackToLevel1( )
-    
-    end 
+       BackToLevel1( )
+   end
 end
 
 --checking to see if the user pressed the right answer and bring them back to level 1
@@ -138,10 +147,10 @@ end
 
 --removing the event listeners
 local function RemoveTextListeners()
-    answerText:removeEventListener( "touch", TouchListenerAnswer)
-    wrongText1:removeEventListener( "touch", TouchListenerWrongAnswer)
-    wrongText2:removeEventListener( "touch", TouchListenerWrongAnswer2)
-    wrongText3:removeEventListener( "touch", TouchListenerWrongAnswer3)
+    answerText:removeEventListener("touch", TouchListenerAnswer)
+    wrongText1:removeEventListener("touch", TouchListenerWrongAnswer)
+    wrongText2:removeEventListener("touch", TouchListenerWrongAnswer2)
+    wrongText3:removeEventListener("touch", TouchListenerWrongAnswer3)
 end
 
 local function DisplayQuestion()
@@ -271,7 +280,7 @@ function scene:create( event )
     wrongText1.anchorX = 0
     wrongText2 = display.newText("", X1, Y1, Arial, 75)
     wrongText2.anchorX = 0
-    wrongText3 = display.newText("", X1, Y1, Arial, 75)
+    wrongText3 = display.newText("", X2, Y1, Arial, 75)
     wrongText3.anchorX = 0
 
     -----------------------------------------------------------------------------------------
