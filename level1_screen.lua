@@ -97,6 +97,7 @@ local L1SoundChannel
 local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
+local backButton
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -188,9 +189,7 @@ end
 local function MakeZombiesVisible()
     zombie2.isVisible = true
     zombie3.isVisible = true
---    zombie4.isVisible = true
---    zombie5.isVisible = true
---    zombie6.isVisible = true
+
 end
 
 local function MakeHeartsVisible()
@@ -217,72 +216,10 @@ local function Level2Transition( )
 end
 
 local function onCollision( self, event )
-     --for testing purposes
-    --print( event.target )        --the first object in the collision
-    --print( event.other )         --the second object in the collision
-    --print( event.selfElement )   --the element (number) of the first object which was hit in the collision
-    --print( event.otherElement )  --the element (number) of the second object which was hit in the collision
-    --print( event.target.myName .. ": collision began with " .. event.other.myName )
-
-    --if ( event.phase == "began" ) then
-
-        --Pop sound
-        --popSoundChannel = audio.play(popSound)
-
-        --if  (event.target.myName == "spikes1") or 
-        --    (event.target.myName == "spikes2") or
-        --    (event.target.myName == "spikes3") then
-
-            -- add sound effect here
-        --    popSoundChannel = audio.play(popSound)
-            -- remove runtime listeners that move the character
-        --    RemoveArrowEventListeners()
-        --    RemoveRuntimeListeners()
-
-            -- remove the character from the display
-        --    display.remove(character)
-
-            -- decrease number of lives
-        --    numLives = numLives - 1
-
-
-        --    if (numLives == 3) then
-                -- update hearts
-        --        heart1.isVisible = true
-         --       heart2.isVisible = true
-         --       heart3.isVisible = true
-        --        timer.performWithDelay(200, ReplaceCharacter)
-
-        --    elseif (numLives == 2) then
-                -- update hearts
-        --        heart1.isVisible = true
-        --        heart2.isVisible = true
-        --        heart3.isVisible = false
-        --       timer.performWithDelay(200, ReplaceCharacter)
-
-
-        --    elseif (numLives == 1) then
-                -- update hearts
-        --        heart1.isVisible = true
-        --        heart2.isVisible = false
-        --        heart3.isVisible = false
-        --        timer.performWithDelay(200, ReplaceCharacter) 
-
-        --    elseif (numLives == 0) then
-                -- update hearts
-        --        heart1.isVisible = false
-        --        heart2.isVisible = false
-        --        heart3.isVisible = false
-        --        timer.performWithDelay(200, YouLoseTransition)
-        --    end
-        --end
-
+ 
         if  (event.target.myName == "zombie2") or
             (event.target.myName == "zombie3") then
-           -- (event.target.myName == "zombie4") or
-            --(event.target.myName == "zombie5") or
-            --(event.target.myName == "zombie6") then
-             --get the zombie that the user hit
+          
                theZombie = event.target
 
             -- stop the character from moving
@@ -299,14 +236,7 @@ local function onCollision( self, event )
         end
 
 
-        --if (event.target.myName == "zombie3") then
-            --check to see if the user has answered 2 questions
-            --if (questionsAnswered == 2) then
-                --Level2Transition( )
-            --end
-        --end        
-
-    --end
+  
 end
 
 
@@ -341,44 +271,20 @@ local function lifeTaker()
 end
 
 local function AddCollisionListeners()
-    --print ("***Called AddCollisionListeners")
-    --if character collides with ball, onCollision will be called
-    --spikes1.collision = onCollision
-    --spikes1:addEventListener( "collision" )
-    --spikes2.collision = onCollision
-    --spikes2:addEventListener( "collision" )
-    --spikes3.collision = onCollision
-    --spikes3:addEventListener( "collision" )
-
+    
      --when character collides with zombie, onCollision will be called    
         zombie2.collision = onCollision
         zombie2:addEventListener( "collision" )
         zombie3.collision = onCollision
         zombie3:addEventListener( "collision" )
-       -- zombie4.collision = onCollision
-       -- zombie4:addEventListener( "collision" )
-       -- zombie5.collision = onCollision
-       -- zombie5:addEventListener( "collision" )
-      --  zombie6.collision = onCollision
-      --  zombie6:addEventListener( "collision" )
-   -- door2.collision = onCollision
-   -- door2:addEventListener( "collision" )
+       
 end
 
 local function RemoveCollisionListeners()
-    --print ("***Called RemoveCollisionListeners")
-    --spikes1:removeEventListener( "collision" )
-    --spikes2:removeEventListener( "collision" )
-   -- spikes3:removeEventListener( "collision" )
-
+  
     zombie2:removeEventListener( "collision" )
     zombie3:removeEventListener( "collision" )
-   -- zombie4:removeEventListener( "collision" )
-   -- zombie5:removeEventListener( "collision" )
-   -- zombie6:removeEventListener( "collision" )
-
-   -- door2:removeEventListener( "collision")
-
+ 
 end
 
 local function AddPhysicsBodies()
@@ -434,6 +340,12 @@ local function RemovePhysicsBodies()
  
 end
 
+
+local function backvisible()
+    if questionsAnswered == 2 then
+        backButton.isVisible = true
+    end
+end
 -----------------------------------------------------------------------------------------
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -472,8 +384,36 @@ function scene:create( event )
     bkg_image.y = display.contentHeight / 2
 
     -- Insert background image into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( bkg_image )    
+    sceneGroup:insert( bkg_image )  
 
+
+    -- Creating Back Button
+    backButton = widget.newButton( 
+    {
+        -- Setting Position
+        x = display.contentWidth*1/8,
+        y = display.contentHeight*15/16,
+
+        -- Setting Dimensions
+        -- width = 1000,
+        -- height = 106,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/Back Button Unpressed.png",
+        overFile = "Images/Back Button Pressed.png",
+
+        -- Setting Functional Properties
+        onRelease = BackTransition
+
+    } )
+
+    backButton.isVisible = false
+
+    
+
+    -- Associating Buttons with this scene
+    sceneGroup:insert( backButton )
+    
     
     -- Insert the platforms
     platform1 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
@@ -513,12 +453,7 @@ function scene:create( event )
         
     sceneGroup:insert( spikes1platform)
 
-    --spikes2 = display.newImageRect("Images/Level-1Spikes2.png", 150, 50)
-    --spikes2.x = display.contentWidth * 6 / 8
-    --spikes2.y = display.contentHeight * 2.5 / 5
-    --spikes2.myName = "spikes2"
-        
-    --sceneGroup:insert( spikes2)
+    
 
     spikes2platform = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     spikes2platform.x = display.contentWidth * 6 / 8
@@ -526,12 +461,7 @@ function scene:create( event )
         
     sceneGroup:insert( spikes2platform)
 
-    --spikes3 = display.newImageRect("Images/Level-1Spikes3.png", 50, 150)
-    --spikes3.x = display.contentWidth * 5.5 / 8
-    --spikes3.y = display.contentHeight * 0.4 / 5
-    --spikes3.myName = "spikes3"
-        
-    --sceneGroup:insert( spikes3)
+   
 
     spikes3platform = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
     spikes3platform.x = display.contentWidth * 5.8 / 8
@@ -541,18 +471,7 @@ function scene:create( event )
 
    
 
-    -- Insert the Door
-    --door = display.newImageRect("Images/Level-1Door.png", display.contentWidth, display.contentHeight)
-   -- door.x = display.contentCenterX
-   -- door.y = display.contentCenterY
-
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
-    --sceneGroup:insert( door )
-
-    -- door 2
-   -- door2 = display.newRect(155, 650, 200, 200)
-   -- door2.isVisible = false
-   -- door2.myName = "door2"
+    
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
@@ -665,35 +584,14 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie3 )
 
-    --zombie4
-    --zombie4 = display.newImageRect ("Images/Zombie.png", 70, 70)
-   -- zombie4.x = 950
-   --zombie4.y = 140
-    --zombie4.myName = "zombie4"
-
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
-   -- sceneGroup:insert( zombie4 )
-
-    --zombie5
-  --  zombie5 = display.newImageRect ("Images/Zombie.png", 70, 70)
-  --  zombie5.x = 750
-  --  zombie5.y = 275
-  --  zombie5.myName = "zombie5"
-
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
-  --  sceneGroup:insert( zombie5 )
-
-    --zombie6
-  --  zombie6 = display.newImageRect ("Images/Zombie.png", 70, 70)
-  --  zombie6.x = 400
-  --  zombie6.y = 720
-  --  zombie6.myName = "zombie6"
-
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
-  --  sceneGroup:insert( zombie6 )
 
 end --function scene:create( event )
 
+
+
+local function BackTransition( )
+    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
+end
 -----------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to appear on screen
@@ -745,6 +643,8 @@ function scene:show( event )
         ReplaceCharacter()
         -- make the lives work
         lifeTaker()
+
+        backvisible()
 
     end
 
