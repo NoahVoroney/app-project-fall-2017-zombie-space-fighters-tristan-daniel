@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------
 --
 -- level1_screen.lua
--- Created by: Ms Raffin
+-- Created by: Daniel Finger
 -- Date: Nov. 22nd, 2014
 -- Description: This is the level 1 screen of the game.
 -----------------------------------------------------------------------------------------
@@ -763,7 +763,7 @@ function scene:hide( event )
         -- Called immediately after scene goes off screen.
         RemoveCollisionListeners()
         RemovePhysicsBodies()
-        audio.stop(L1SoundChannel)
+        audio.stop()
         physics.stop()
         RemoveArrowEventListeners()
         RemoveRuntimeListeners()
