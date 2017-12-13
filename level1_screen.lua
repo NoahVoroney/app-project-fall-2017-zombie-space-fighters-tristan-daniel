@@ -449,6 +449,8 @@ function scene:create( event )
     spikes1platform.x = display.contentWidth * 3 / 8
     spikes1platform.y = display.contentHeight * 2.8 / 5
 
+    sceneGroup:insert( spikes1platform)
+
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform5.x = display.contentWidth * 3 / 8
     platform5.y = display.contentHeight * 2.8 / 5
@@ -458,6 +460,8 @@ function scene:create( event )
     spikes2platform = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     spikes2platform.x = display.contentWidth * 6 / 8
     spikes2platform.y = display.contentHeight * 2.2 / 5
+
+    sceneGroup:insert( spikes2platform)
 
     platform6 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     platform6.x = display.contentWidth * 6 / 8
@@ -547,7 +551,6 @@ function scene:create( event )
     floor.x = display.contentCenterX
     floor.y = display.contentHeight * 1.05
     
-
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( floor )
 
