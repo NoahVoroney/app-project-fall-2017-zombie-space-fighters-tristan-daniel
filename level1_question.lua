@@ -1,11 +1,11 @@
 -----------------------------------------------------------------------------------------
 --
 -- level1_screen.lua
--- Created by: Tristan Kalabric, Daniel Finger
--- Date: December 13, 2017
--- Description: This is the level 1 question screen of the game. There are 4 possible answers to a math question,
--- the user has to press the one correct answer or they will lose a life. If they get the answer right or wrong
--- the zombie will disapear.
+-- Created by: Allison
+-- Date: May 16, 2017
+-- Description: This is the level 1 screen of the game. the charater can be dragged to move
+--If character goes off a certain araea they go back to the start. When a user interactes
+--with piant a trivia question will come up. they will have a limided time to click on the answer
 -----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
@@ -62,13 +62,14 @@ local textTouched = false
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
-
 --making transition to next scene
 local function BackToLevel1() 
     composer.hideOverlay("crossFade", 400 )
   
     ResumeGame()
 end 
+
+
 
 
 local function TouchListenerAnswer(touch)

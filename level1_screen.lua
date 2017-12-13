@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
 --
 -- level1_screen.lua
--- Created by: Tristan Kalabric, Daniel Finger
--- Date: December 13, 2017
+-- Created by: Daniel Finger
+-- Date: Nov. 22nd, 2014
 -- Description: This is the level 1 screen of the game.
 -----------------------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ local lArrow
 local uArrow
 
 local motionx = 0
-local SPEED = 5
+local SPEED = 4
 local LINEAR_VELOCITY = -350
 local GRAVITY =24
 
@@ -76,6 +76,10 @@ local YouWin
 
 local zombie2
 local zombie3
+--local zombie4
+--local zombie5
+--local zombie6
+--local theZombie
 
 local questionsAnswered = 0
 
@@ -88,7 +92,7 @@ local L1SoundChannel
 local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
-local visibleButton
+local backButton
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -107,9 +111,10 @@ end
  
 -- When right arrow is touched, move character right
 local function right (touch)
-
+    --if (character ~= nil) then
         motionx = SPEED
         character.xScale = 1
+    --end
 end
 
 -- When up arrow is touched, add vertical so it can jump
@@ -121,8 +126,6 @@ end
 
 -- Move character horizontally
 local function movePlayer (event)
-
-        character.x = character.x + motionx
     if (character ~= nil) then
         character.x = character.x + motionx
     end
@@ -134,6 +137,7 @@ local function stop (event)
         motionx = 0
     end
 end
+-- Runtime:addEventListener("touch", stop )
 
 local function AddArrowEventListeners()
     rArrow:addEventListener("touch", right)
@@ -201,7 +205,13 @@ end
 local function Level2Transition( )
     composer.gotoScene( "you_win" )
 
-    --go to the main menu **FOR NOW**
+    --audio.stop ( mmMusicChannel)
+
+
+    --play you win audio
+    --youWinSoundChannel = audio.play(youWinSound)
+
+    --go to the main menu for now
     composer.gotoScene( "main_menu" )
 end
 
@@ -291,12 +301,6 @@ local function AddPhysicsBodies()
     physics.addBody( platform1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
-
-    physics.addBody( spikes1platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( spikes2platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( spikes3platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-
     physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform5, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform6, "static", { density=1.0, friction=0.3, bounce=0.2 } )
@@ -309,7 +313,7 @@ local function AddPhysicsBodies()
 
     physics.addBody(zombie2, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody(zombie3, "static",  {density=0, friction=0, bounce=0} )
-
+   
 end
 
 local function RemovePhysicsBodies()
@@ -317,11 +321,6 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform2)
     physics.removeBody(platform3)
     physics.removeBody(platform4)
-
-    physics.removeBody(spikes1platform)
-    physics.removeBody(spikes2platform)
-    physics.removeBody(spikes3platform)
-
     physics.removeBody(platform5)
     physics.removeBody(platform6)
     physics.removeBody(platform7)
@@ -333,7 +332,7 @@ local function RemovePhysicsBodies()
  
 end
 
---make the back button visible
+
 local function backvisible()
     if questionsAnswered == 2 then
         backButton.isVisible = true
@@ -348,19 +347,11 @@ function ResumeGame()
     --updates lives
     lifeTaker()
 
-    -- set the character back to the initial position
-    character.x = display.contentWidth * 0.5 / 8
-    character.y = display.contentHeight  * 0.1 / 3
-
+    --character back to initial pos
+  
     -- make character visible again
     character.isVisible = true
     
-        if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
-                print ("***Removed theZombie " .. theZombie.myName)
-                theZombie.isVisible = false
-                physics.removeBody(theZombie)              
-                
-        end
 
     if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
         print ("***Removed theZombie " .. theZombie.myName)
@@ -369,6 +360,8 @@ function ResumeGame()
     end
 
 end
+
+
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -400,6 +393,10 @@ function scene:create( event )
         -- Setting Position
         x = display.contentWidth*1/8,
         y = display.contentHeight*15/16,
+
+        -- Setting Dimensions
+        -- width = 1000,
+        -- height = 106,
 
         -- Setting Visual Properties
         defaultFile = "Images/BackButtonUnpressed.png",
@@ -445,9 +442,6 @@ function scene:create( event )
         
     sceneGroup:insert( platform4 )
 
-    spikes1platform = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
-    spikes1platform.x = display.contentWidth * 3 / 8
-    spikes1platform.y = display.contentHeight * 2.8 / 5
 
     sceneGroup:insert( spikes1platform)
 
@@ -457,9 +451,6 @@ function scene:create( event )
         
     sceneGroup:insert( platform5)
 
-    spikes2platform = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
-    spikes2platform.x = display.contentWidth * 6 / 8
-    spikes2platform.y = display.contentHeight * 2.2 / 5
 
     sceneGroup:insert( spikes2platform)
 
@@ -469,11 +460,6 @@ function scene:create( event )
         
     sceneGroup:insert( platform6)
 
-    spikes3platform = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
-    spikes3platform.x = display.contentWidth * 5.8 / 8
-    spikes3platform.y = display.contentHeight * 0.4 / 5
-        
-    sceneGroup:insert( spikes3platform)
 
     platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
     platform7.x = display.contentWidth * 5.8 / 8
@@ -591,7 +577,8 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie3 )
 
-end
+
+end --function scene:create( event )
 
 
 
@@ -620,6 +607,7 @@ function scene:show( event )
     elseif ( phase == "did" ) then
 
         -- Called when the scene is now on screen.
+        -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
 
         L1SoundChannel = audio.play(L1Music )  
@@ -644,15 +632,14 @@ function scene:show( event )
 
         -- create the character, add physics bodies and runtime listeners
         ReplaceCharacter()
-       
         -- make the lives work
         lifeTaker()
 
-        -- make the back button visible
         backvisible()
 
     end
-end
+
+end --function scene:show( event )
 
 -----------------------------------------------------------------------------------------
 
@@ -667,6 +654,7 @@ function scene:hide( event )
 
     if ( phase == "will" ) then
         -- Called when the scene is on screen (but is about to go off screen).
+        -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
 
     -----------------------------------------------------------------------------------------
@@ -682,7 +670,7 @@ function scene:hide( event )
         display.remove(character)
     end
 
-end
+end --function scene:hide( event )
 
 -----------------------------------------------------------------------------------------
 
@@ -695,8 +683,10 @@ function scene:destroy( event )
     -----------------------------------------------------------------------------------------
 
     -- Called prior to the removal of scene's view ("sceneGroup").
+    -- Insert code here to clean up the scene.
     -- Example: remove display objects, save state, etc.
-end
+
+end -- function scene:destroy( event )
 
 -----------------------------------------------------------------------------------------
 -- EVENT LISTENERS
