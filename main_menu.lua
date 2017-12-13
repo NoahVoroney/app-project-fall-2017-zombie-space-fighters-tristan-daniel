@@ -1,9 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
 -- main_menu.lua
--- Created by: Your Name
--- Date: Month Day, Year
--- Description: This is the main menu, displaying the credits, instructions & play buttons.
 -----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
@@ -103,8 +100,8 @@ function scene:create( event )
             y = display.contentHeight/2,
 
             -- Insert the images here
-            defaultFile = "Images/StartButtonUnpressed.png",
-            overFile = "Images/StartButtonPressed.png",
+            defaultFile = "Images/StartButtonUnpressed@2x.png",
+            overFile = "Images/StartButtonPressed@2x.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = Level1ScreenTransition  
@@ -121,8 +118,8 @@ function scene:create( event )
             y = display.contentHeight/2,
 
             -- Insert the images here
-            defaultFile = "Images/CreditsButtonUnpressed.png",
-            overFile = "Images/CreditsButtonPressed.png",
+            defaultFile = "Images/CreditsButtonUnpressed3@2x.png",
+            overFile = "Images/CreditsButtonPressed3@2x.png",
 
             -- When the button is released, call the Credits transition function
             onRelease = CreditsTransition
@@ -136,8 +133,8 @@ function scene:create( event )
             y = display.contentHeight/2,
 
             -- Insert the images here
-            defaultFile = "Images/StoreButtonUnpressed.png",
-            overFile = "Images/StoreButtonPressed.png",
+            defaultFile = "Images/StoreButtonUnpressed@2x.png",
+            overFile = "Images/StoreButtonPressed@2x.png",
 
             -- When the button is released, call the Credits transition function
             onRelease = CreditsTransition
@@ -152,8 +149,8 @@ function scene:create( event )
             y = display.contentHeight*7/8,
 
             -- Insert the images here
-            defaultFile = "Images/InstructionsButtonUnpressed.png",
-            overFile = "Images/InstructionsButtonPressed.png",
+            defaultFile = "Images/InstructionsButtonUnpressed@2x.png",
+            overFile = "Images/InstructionsButtonPressed@2x.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = InstructionScreenTransition

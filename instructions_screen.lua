@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------------------------
 --
 -- credits_screen.lua
--- Created by: Your Name
+-- Created by: Tristan Kalabric, Daniel Finger
 -- Special thanks to Wal Wal for helping in the design of this framework.
--- Date: Month Day, Year
+-- Date: December 13, 2017
 -- Description: This is the credits page, displaying a back button to the main menu.
 -----------------------------------------------------------------------------------------
 
@@ -82,8 +82,8 @@ function scene:create( event )
         -- height = 106,
 
         -- Setting Visual Properties
-        defaultFile = "Images/BackButtonUnpressed.png",
-        overFile = "Images/BackButtonPressed.png",
+        defaultFile = "Images/BackButtonUnpressed@2x.png",
+        overFile = "Images/BackButtonPressed@2x.png",
 
         -- Setting Functional Properties
         onRelease = BackTransition
