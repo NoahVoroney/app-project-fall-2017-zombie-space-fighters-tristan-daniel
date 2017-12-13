@@ -32,12 +32,20 @@ local scene = composer.newScene( sceneName )
 local bkg
 
 ----------------------------------------------------------------------------------------
+
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+local function MenuTransition( )
+    
+    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
+end
 
---------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-- GLOBAL SCENE FUNCTIONS
+-----------------------------------------------------------------------------------------
+
 -- The function called when the screen doesn't exist
 function scene:create( event )
 
@@ -55,10 +63,6 @@ function scene:create( event )
     sceneGroup:insert( bkg )
 
 end    
------------------------------------------------------------------------------------------
--- LOCAL FUNCTIONS
------------------------------------------------------------------------------------------
-
 
 
 
@@ -91,6 +95,11 @@ function scene:show( event )
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
         --youLose1SoundChannel = audio.play( youLose1 )
+
+        timer.performWithDelay ( 3000, MenuTransition)  
+
+
+
     end
 
 end

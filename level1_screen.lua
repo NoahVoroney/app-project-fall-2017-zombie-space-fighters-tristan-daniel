@@ -102,6 +102,11 @@ local backButton
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+local function WinTransition( )
+    composer.gotoScene( "you_win", {effect = "fromBottom", time = 500})
+end
+
+
 -- When left arrow is touched, move character left
 local function left (touch)
   motionx = -SPEED
@@ -233,9 +238,13 @@ local function onCollision( self, event )
 
             -- Increment questions answered
                questionsAnswered = questionsAnswered + 1
+
+                if questionsAnswered == 2 then
+                    backButton.isVisible = true
+
+                end
+
         end
-
-
   
 end
 
@@ -296,10 +305,6 @@ local function AddPhysicsBodies()
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
-    --physics.addBody( spikes1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    --physics.addBody( spikes2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    --physics.addBody( spikes3, "static", { density=1.0, friction=0.3, bounce=0.2 } )    
-
     physics.addBody( spikes1platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( spikes2platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( spikes3platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
@@ -311,12 +316,7 @@ local function AddPhysicsBodies()
 
     physics.addBody(zombie2, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody(zombie3, "static",  {density=0, friction=0, bounce=0} )
-   -- physics.addBody(zombie4, "static",  {density=0, friction=0, bounce=0} )
-    --physics.addBody(zombie5, "static",  {density=0, friction=0, bounce=0} )
-   -- physics.addBody(zombie6, "static",  {density=0, friction=0, bounce=0} )
-
-    --physics.addBody(door2, "static", {density=1, friction=0.3, bounce=0.2})
-
+   
 end
 
 local function RemovePhysicsBodies()
@@ -324,10 +324,6 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform2)
     physics.removeBody(platform3)
     physics.removeBody(platform4)
-
-    --physics.removeBody(spikes1)
-    --physics.removeBody(spikes2)
-    --physics.removeBody(spikes3)
 
     physics.removeBody(spikes1platform)
     physics.removeBody(spikes2platform)
@@ -387,7 +383,10 @@ function scene:create( event )
     sceneGroup:insert( bkg_image )  
 
 
+
+
     -- Creating Back Button
+    --==============================================================================
     backButton = widget.newButton( 
     {
         -- Setting Position
@@ -403,7 +402,7 @@ function scene:create( event )
         overFile = "Images/BackButtonPressed.png",
 
         -- Setting Functional Properties
-        onRelease = BackTransition
+        onRelease = WinTransition
 
     } )
 
@@ -413,8 +412,10 @@ function scene:create( event )
 
     -- Associating Buttons with this scene
     sceneGroup:insert( backButton )
+    --==========================================================================
     
-    
+
+
     -- Insert the platforms
     platform1 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform1.x = display.contentWidth * 1 / 8
@@ -589,9 +590,7 @@ end --function scene:create( event )
 
 
 
-local function BackTransition( )
-    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
-end
+
 -----------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to appear on screen
