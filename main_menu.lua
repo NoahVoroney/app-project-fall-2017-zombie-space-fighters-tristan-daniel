@@ -1,6 +1,9 @@
 -----------------------------------------------------------------------------------------
 --
 -- main_menu.lua
+-- Created by: Tristan Kalabric, Daniel Finger
+-- Date: December 13, 2017
+-- Description: This is the main menu, displaying the credits, instructions, store & play buttons.
 -----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------

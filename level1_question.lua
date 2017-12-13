@@ -70,17 +70,6 @@ local function BackToLevel1()
     ResumeGame()
 end 
 
------------------------------------------------------------------------------------------
---checking to see if the user pressed the right answer and bring them back to level 1
---local function TouchListenerAnswer(touch)
---    userAnswer = answerText.text
-    
---    if (touch.phase == "ended") then
-
---        BackToLevel1( )
-    
---    end
---end    
 
 local function TouchListenerAnswer(touch)
 
@@ -98,7 +87,6 @@ local function TouchListenerWrongAnswer(touch)
     if (touch.phase == "ended") then
 
         numLives = numLives - 1
-        print ("***numLives = " .. numLives)
 
         BackToLevel1( )
         
@@ -112,7 +100,6 @@ local function TouchListenerWrongAnswer2(touch)
     
     if (touch.phase == "ended") then
         numLives = numLives - 1
-        print ("***numLives = " .. numLives)
 
         BackToLevel1( )
         
@@ -124,7 +111,6 @@ local function TouchListenerWrongAnswer3(touch)
     
     if (touch.phase == "ended") then
         numLives = numLives - 1
-        print ("***numLives = " .. numLives)
 
         BackToLevel1( )
         
