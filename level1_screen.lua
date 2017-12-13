@@ -44,14 +44,9 @@ local platform1
 local platform2
 local platform3
 local platform4
-
---local spikes1
---local spikes2
---local spikes3
-
-local spikes1platform
-local spikes2platform
-local spikes3platform
+local platform5
+local platform6
+local platform7
 
 
 --local door
@@ -131,9 +126,9 @@ end
 
 -- Move character horizontally
 local function movePlayer (event)
-    --if (character ~= nil) then
+    if (character ~= nil) then
         character.x = character.x + motionx
-    --end
+    end
 end
  
 -- Stop character movement when no arrow is pushed
@@ -222,53 +217,56 @@ end
 
 local function onCollision( self, event )
  
-        if  (event.target.myName == "zombie2") or
-            (event.target.myName == "zombie3") then
+    if  (event.target.myName == "zombie2") or
+        (event.target.myName == "zombie3") then
           
-               theZombie = event.target
+        theZombie = event.target
 
-            -- stop the character from moving
-               motionx = 0
+        -- stop the character from moving
+        motionx = 0
 
-            -- make the character invisible
-               character.isVisible = false
+        -- make the character invisible
+        character.isVisible = false
 
-            -- show overlay with math question
-               composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
+        -- show overlay with math question
+        composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
 
-            -- Increment questions answered
-               questionsAnswered = questionsAnswered + 1
+        -- remove the character from the scene
+        --display.remove(character)
 
-                if questionsAnswered == 2 then
-                    backButton.isVisible = true
+        -- Increment questions answered
+        questionsAnswered = questionsAnswered + 1
 
-                end
+        if (questionsAnswered == 2) then
+            backButton.isVisible = true
 
         end
+
+    end
   
 end
 
 
 local function lifeTaker()
     if (numLives == 3) then
-                -- update hearts
-            heart1.isVisible = true
-            heart2.isVisible = true
-            heart3.isVisible = true
+        -- update hearts
+        heart1.isVisible = true
+        heart2.isVisible = true
+        heart3.isVisible = true
             
         elseif (numLives == 2) then
                 -- update hearts
             heart1.isVisible = true
             heart2.isVisible = true
             heart3.isVisible = false
-            timer.performWithDelay(200, ReplaceCharacter)
+            --timer.performWithDelay(200, ReplaceCharacter)
 
          elseif (numLives == 1) then
                 -- update hearts
             heart1.isVisible = true
             heart2.isVisible = false
             heart3.isVisible = false
-            timer.performWithDelay(200, ReplaceCharacter) 
+            --timer.performWithDelay(200, ReplaceCharacter) 
 
         elseif (numLives == 0) then
                 -- update hearts
@@ -304,10 +302,9 @@ local function AddPhysicsBodies()
     physics.addBody( platform2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-
-    physics.addBody( spikes1platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( spikes2platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( spikes3platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    physics.addBody( platform5, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    physics.addBody( platform6, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+    physics.addBody( platform7, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -324,10 +321,9 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform2)
     physics.removeBody(platform3)
     physics.removeBody(platform4)
-
-    physics.removeBody(spikes1platform)
-    physics.removeBody(spikes2platform)
-    physics.removeBody(spikes3platform)
+    physics.removeBody(platform5)
+    physics.removeBody(platform6)
+    physics.removeBody(platform7)
 
     physics.removeBody(leftW)
     physics.removeBody(rightW)
@@ -348,17 +344,22 @@ end
 
 function ResumeGame()
 
+    --updates lives
+    lifeTaker()
+
+    -- set the character back to the initial position
+    character.x = display.contentWidth * 0.5 / 8
+    character.y = display.contentHeight  * 0.1 / 3
+
     -- make character visible again
     character.isVisible = true
     
-    --if (questionsAnswered > 0) then
-        if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
-                print ("***Removed theZombie " .. theZombie.myName)
-                theZombie.isVisible = false
-                physics.removeBody(theZombie)              
-                
-        end
-    --end
+
+    if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
+        print ("***Removed theZombie " .. theZombie.myName)
+        theZombie.isVisible = false
+        physics.removeBody(theZombie)              
+    end
 
 end
 
@@ -441,38 +442,26 @@ function scene:create( event )
         
     sceneGroup:insert( platform4 )
 
-    --spikes1 = display.newImageRect("Images/Level-1Spikes1.png", 250, 50)
-    --spikes1.x = display.contentWidth * 3 / 8
-    --spikes1.y = display.contentHeight * 2.5 / 5
-    --spikes1.myName = "spikes1"
+
+    platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
+    platform5.x = display.contentWidth * 3 / 8
+    platform5.y = display.contentHeight * 2.8 / 5
         
-    --sceneGroup:insert( spikes1)
+    sceneGroup:insert( platform5)
 
-    spikes1platform = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
-    spikes1platform.x = display.contentWidth * 3 / 8
-    spikes1platform.y = display.contentHeight * 2.8 / 5
+
+    platform6 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
+    platform6.x = display.contentWidth * 6 / 8
+    platform6.y = display.contentHeight * 2.2 / 5
         
-    sceneGroup:insert( spikes1platform)
+    sceneGroup:insert( platform6)
 
-    
 
-    spikes2platform = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
-    spikes2platform.x = display.contentWidth * 6 / 8
-    spikes2platform.y = display.contentHeight * 2.2 / 5
+    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
+    platform7.x = display.contentWidth * 5.8 / 8
+    platform7.y = display.contentHeight * 0.4 / 5
         
-    sceneGroup:insert( spikes2platform)
-
-   
-
-    spikes3platform = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
-    spikes3platform.x = display.contentWidth * 5.8 / 8
-    spikes3platform.y = display.contentHeight * 0.4 / 5
-        
-    sceneGroup:insert( spikes3platform)
-
-   
-
-    
+    sceneGroup:insert( platform7)
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
