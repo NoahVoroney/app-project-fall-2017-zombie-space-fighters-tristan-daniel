@@ -39,7 +39,7 @@ local bkg
 
 local function MenuTransition( )
     
-    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
+    composer.gotoScene( "level2_screen", {effect = "fromBottom", time = 500})
 end
 
 -----------------------------------------------------------------------------------------

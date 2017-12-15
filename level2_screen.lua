@@ -20,7 +20,7 @@ local physics = require("physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level1_screen"
+sceneName = "level2_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ local scene = composer.newScene( sceneName )
 -- GLOBAL VARIABLES
 -----------------------------------------------------------------------------------------
 
-numLives = 3
+
 
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
@@ -46,7 +46,6 @@ local platform3
 local platform4
 local platform5
 local platform6
-local platform7
 
 
 --local door
@@ -76,10 +75,8 @@ local YouWin
 
 local zombie2
 local zombie3
---local zombie4
---local zombie5
---local zombie6
---local theZombie
+local zombie4
+
 
 local questionsAnswered = 0
 
@@ -93,6 +90,8 @@ local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
 local backButton
+
+
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -163,7 +162,7 @@ end
 
 
 local function ReplaceCharacter()
-    character = display.newImageRect("Images/KickyKatRight.png", 100, 150)
+    character = display.newImageRect("Images/Character2.png", 100, 150)
     character.x = display.contentWidth * 0.5 / 8
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 75
@@ -187,8 +186,10 @@ local function ReplaceCharacter()
 end
 
 local function MakeZombiesVisible()
+    zombie2.xScale = -1
     zombie2.isVisible = true
     zombie3.isVisible = true
+    zombie4.isVisible = true
 
 end
 
@@ -202,7 +203,7 @@ local function YouLoseTransition()
     composer.gotoScene( "you_lose" )
 end
 
-local function Level2Transition( )
+local function LevelTransition( )
     composer.gotoScene( "you_win" )
 
     --audio.stop ( mmMusicChannel)
@@ -218,8 +219,8 @@ end
 local function onCollision( self, event )
  
     if  (event.target.myName == "zombie2") or
-        (event.target.myName == "zombie3") then
-          
+        (event.target.myName == "zombie3") or
+        (event.target.myName == "zombie4") then
         theZombie = event.target
 
         -- stop the character from moving
@@ -229,7 +230,7 @@ local function onCollision( self, event )
         character.isVisible = false
 
         -- show overlay with math question
-        composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
+        composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
 
         -- remove the character from the scene
         --display.remove(character)
@@ -284,6 +285,8 @@ local function AddCollisionListeners()
         zombie2:addEventListener( "collision" )
         zombie3.collision = onCollision
         zombie3:addEventListener( "collision" )
+        zombie4.collision = onCollision
+        zombie4:addEventListener( "collision" )
        
 end
 
@@ -291,7 +294,7 @@ local function RemoveCollisionListeners()
   
     zombie2:removeEventListener( "collision" )
     zombie3:removeEventListener( "collision" )
- 
+    zombie4:removeEventListener( "collision" )
 end
 
 local function AddPhysicsBodies()
@@ -304,7 +307,7 @@ local function AddPhysicsBodies()
     physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform5, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform6, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( platform7, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+   
 
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -313,6 +316,7 @@ local function AddPhysicsBodies()
 
     physics.addBody(zombie2, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody(zombie3, "static",  {density=0, friction=0, bounce=0} )
+    physics.addBody(zombie4, "static",  {density=0, friction=0, bounce=0} )
    
 end
 
@@ -323,7 +327,7 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform4)
     physics.removeBody(platform5)
     physics.removeBody(platform6)
-    physics.removeBody(platform7)
+    
 
     physics.removeBody(leftW)
     physics.removeBody(rightW)
@@ -376,7 +380,7 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Insert the background image
-    bkg_image = display.newImageRect("Images/Level1Background.png", display.contentWidth, display.contentHeight)
+    bkg_image = display.newImageRect("Images/Level2Background.png", display.contentWidth, display.contentHeight)
     bkg_image.x = display.contentWidth / 2 
     bkg_image.y = display.contentHeight / 2
 
@@ -418,50 +422,45 @@ function scene:create( event )
 
 
     -- Insert the platforms
+    --DOE
     platform1 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform1.x = display.contentWidth * 1 / 8
     platform1.y = display.contentHeight * 1.6 / 4
         
     sceneGroup:insert( platform1 )
-
+    --DONE
     platform2 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
-    platform2.x = display.contentWidth /2.1
-    platform2.y = display.contentHeight * 1.2 / 4
+    platform2.x = display.contentWidth /2.9
+    platform2.y = display.contentHeight * 2.2 / 4
         
     sceneGroup:insert( platform2 )
-
+    --DONE
     platform3 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
     platform3.x = display.contentWidth *3 / 5
-    platform3.y = display.contentHeight * 3.5 / 5
+    platform3.y = display.contentHeight * 4 / 5
         
     sceneGroup:insert( platform3 )
-
+    --DONE
     platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
-    platform4.x = display.contentWidth *4.7 / 5
-    platform4.y = display.contentHeight * 1.3 / 5
+    platform4.x = display.contentWidth *4.2 / 5
+    platform4.y = display.contentHeight * 3.5 / 5
         
     sceneGroup:insert( platform4 )
 
-
+    --DONE
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
-    platform5.x = display.contentWidth * 3 / 8
-    platform5.y = display.contentHeight * 2.8 / 5
+    platform5.x = display.contentWidth * 4.5 / 8
+    platform5.y = display.contentHeight * 2 / 5
         
     sceneGroup:insert( platform5)
 
-
+    --DONE
     platform6 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
-    platform6.x = display.contentWidth * 6 / 8
-    platform6.y = display.contentHeight * 2.2 / 5
+    platform6.x = display.contentWidth * 3 / 8
+    platform6.y = display.contentHeight * 4.5 / 5
         
     sceneGroup:insert( platform6)
 
-
-    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
-    platform7.x = display.contentWidth * 5.8 / 8
-    platform7.y = display.contentHeight * 0.4 / 5
-        
-    sceneGroup:insert( platform7)
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
@@ -555,24 +554,33 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( YouWin )
 
-    --zombie2
+    --zombie2       DONE
     zombie2 = display.newImageRect ("Images/Zombie.png", 70, 70)
-    zombie2.x = 610
-    zombie2.y = 480
+    zombie2.x = 385
+    zombie2.y = 632
     zombie2.myName = "zombie2"
 
-    -- Insert objects into the scene group in order to ONLY be associated with this scene
+    -- Insert obje into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie2 )
 
 
     --zombie3
     zombie3 = display.newImageRect ("Images/Zombie.png", 70, 70)
-    zombie3.x = 490
-    zombie3.y = 170
+    zombie3.x = 850
+    zombie3.y = 480
     zombie3.myName = "zombie3"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie3 )
+
+    --zombie4 DONE
+    zombie4 = display.newImageRect ("Images/Zombie.png", 70, 70)
+    zombie4.x = 590
+    zombie4.y = 248
+    zombie4.myName = "zombie4"
+
+    -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( zombie4 )
 
 
 end --function scene:create( event )
