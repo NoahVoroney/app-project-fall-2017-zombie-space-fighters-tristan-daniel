@@ -43,7 +43,7 @@ local wrongAnswer1
 local wrongAnswer2
 local wrongAnswer3
 
-local answerText 
+local answerText
 local wrongText1
 local wrongText2
 local wrongText3
@@ -51,6 +51,11 @@ local wrongText3
 local answerPosition = 1
 local bkg
 local cover
+
+local totalSeconds = 40
+local secondsLeft = 40
+local clockText
+local countDownTimer
 
 local X1 = display.contentWidth*2/7
 local X2 = display.contentWidth*4/7
@@ -63,14 +68,34 @@ local textTouched = false
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 --making transition to next scene
-local function BackToLevel1() 
+local function UpdateTime()
+
+    -- decrement the number of seconds
+    secondsLeft = secondsLeft - 1
+
+    -- display the number of seconds left in the clock object
+    clockText.text = secondsLeft .. ""
+
+    if (secondsLeft == 0 ) then
+        -- reset the number of seconds left
+        secondsLeft = totalSeconds
+
+        numLives = numLives - 1
+    end
+end
+
+
+    local function StartTimer()
+        -- create a countdown timer that loops infinitely
+        countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
+    end
+
+
+local function BackToLevel1()
     composer.hideOverlay("crossFade", 400 )
-  
+
     ResumeGame()
-end 
-
-
-
+end
 
 local function TouchListenerAnswer(touch)
 
@@ -90,37 +115,35 @@ local function TouchListenerWrongAnswer(touch)
         numLives = numLives - 1
 
         BackToLevel1( )
-        
-        
-    end 
+
+
+    end
 end
 
 --checking to see if the user pressed the right answer and bring them back to level 1
 local function TouchListenerWrongAnswer2(touch)
 
-    
+
     if (touch.phase == "ended") then
         numLives = numLives - 1
 
         BackToLevel1( )
-        
-    end 
+
+    end
 end
 
 local function TouchListenerWrongAnswer3(touch)
 
-    
+
     if (touch.phase == "ended") then
         numLives = numLives - 1
 
         BackToLevel1( )
-        
-    end 
+
+    end
 end
 
-
-
---adding the event listeners 
+--adding the event listeners
 local function AddTextListeners()
     answerText:addEventListener("touch", TouchListenerAnswer)
     wrongAnswerText1:addEventListener("touch", TouchListenerWrongAnswer)
@@ -160,7 +183,7 @@ local function DisplayQuestion()
 
     --creating answer text from list it corispondes with the animals list
     answerText.text = answer
-    
+
     --creating wrong answers
     wrongAnswerText1.text = wrongAnswer1
     wrongAnswerText2.text = wrongAnswer2
@@ -177,25 +200,25 @@ local function PositionAnswers()
 
         answerText.x = X1
         answerText.y = Y1
-        
+
         wrongAnswerText1.x = X2
         wrongAnswerText1.y = Y1
-        
+
         wrongAnswerText2.x = X1
         wrongAnswerText2.y = Y2
 
         wrongAnswerText3.x = X2
         wrongAnswerText3.y = Y2
 
-        
+
     elseif (answerPosition == 2) then
 
         answerText.x = X2
         answerText.y = Y2
-            
+
         wrongAnswerText1.x = X1
         wrongAnswerText1.y = Y1
-            
+
         wrongAnswerText2.x = X2
         wrongAnswerText2.y = Y1
 
@@ -207,30 +230,30 @@ local function PositionAnswers()
 
         answerText.x = X1
         answerText.y = Y2
-            
+
         wrongAnswerText1.x = X2
         wrongAnswerText1.y = Y2
-            
+
         wrongAnswerText2.x = X1
         wrongAnswerText2.y = Y1
 
         wrongAnswerText3.x = X2
         wrongAnswerText3.y = Y1
-            
+
     elseif (answerPosition == 4) then
 
         answerText.x = X2
         answerText.y = Y1
-            
+
         wrongAnswerText1.x = X1
         wrongAnswerText1.y = Y2
-            
+
         wrongAnswerText2.x = X2
         wrongAnswerText2.y = Y2
 
         wrongAnswerText3.x = X1
         wrongAnswerText3.y = Y1
-            
+
     end
 end
 
@@ -244,7 +267,7 @@ end
 function scene:create( event )
 
     -- Creating a group that associates objects with the scene
-    local sceneGroup = self.view  
+    local sceneGroup = self.view
 
     -----------------------------------------------------------------------------------------
     --covering the other scene with a rectangle so it looks faded and stops touch from going through
@@ -256,8 +279,7 @@ function scene:create( event )
     --making a cover rectangle to have the background fully bolcked where the question is
     cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.8, display.contentHeight*0.95, 50 )
     --setting its colour
-    cover:setFillColor(96/255, 96/255, 96/255)
-
+    cover:setFillColor(102/255, 0/255, 0/255)
     -- create the question text object
     questionText = display.newText("", display.contentCenterX, display.contentCenterY*3/8, Arial, 75)
 
@@ -278,6 +300,9 @@ function scene:create( event )
     wrongText2.anchorX = 0
     wrongText3 = display.newText("", X2, Y1, Arial, 75)
     wrongText3.anchorX = 0
+
+    clockText = display.newText(secondsLeft, 150, 80, native.systemFontBold, 80)
+    clockText:setFillColor(255/255, 129/255, 7/255)
 
 
     -----------------------------------------------------------------------------------------
@@ -316,6 +341,7 @@ function scene:show( event )
         DisplayQuestion()
         PositionAnswers()
         AddTextListeners()
+        StartTimer()
     end
 
 end --function scene:show( event )
@@ -342,7 +368,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
-        
+
     end
 
 end --function scene:hide( event )
@@ -357,7 +383,7 @@ function scene:destroy( event )
 
     -----------------------------------------------------------------------------------------
 
-    -- Called prior to the removal of scene's view ("sceneGroup"). 
+    -- Called prior to the removal of scene's view ("sceneGroup").
     -- Insert code here to clean up the scene.
     -- Example: remove display objects, save state, etc.
 
