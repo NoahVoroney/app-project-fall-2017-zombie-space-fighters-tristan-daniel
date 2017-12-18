@@ -38,11 +38,13 @@ local questionText
 local firstNumber
 local secondNumber
 
+-- these are the numbers
 local answer
 local wrongAnswer1
 local wrongAnswer2
 local wrongAnswer3
 
+-- these are the text objects holding the numbers
 local answerText
 local wrongText1
 local wrongText2
@@ -69,9 +71,6 @@ local function BackToLevel1()
     ResumeGame()
 end
 
-
-
-
 local function TouchListenerAnswer(touch)
 
     userAnswer = answerText.text
@@ -90,8 +89,6 @@ local function TouchListenerWrongAnswer(touch)
         numLives = numLives - 1
 
         BackToLevel1( )
-
-
     end
 end
 
@@ -123,18 +120,13 @@ end
 --adding the event listeners
 local function AddTextListeners()
     answerText:addEventListener("touch", TouchListenerAnswer)
-    wrongAnswerText1:addEventListener("touch", TouchListenerWrongAnswer)
-    wrongAnswerText2:addEventListener("touch", TouchListenerWrongAnswer2)
-    wrongAnswerText3:addEventListener("touch", TouchListenerWrongAnswer3)
+    wrongText1:addEventListener("touch", TouchListenerWrongAnswer)
+    wrongText2:addEventListener("touch", TouchListenerWrongAnswer2)
+    wrongText3:addEventListener("touch", TouchListenerWrongAnswer3)
 end
 
 --removing the event listeners
 local function RemoveTextListeners()
-    answerText:removeEventListener( "touch", TouchListenerAnswer)
-    wrongAnswerText1:removeEventListener( "touch", TouchListenerWrongAnswer)
-    wrongAnswerText2:removeEventListener( "touch", TouchListenerWrongAnswer2)
-    wrongAnswerText3:removeEventListener( "touch", TouchListenerWrongAnswer3)
-
     answerText:removeEventListener("touch", TouchListenerAnswer)
     wrongText1:removeEventListener("touch", TouchListenerWrongAnswer)
     wrongText2:removeEventListener("touch", TouchListenerWrongAnswer2)
@@ -162,9 +154,9 @@ local function DisplayQuestion()
     answerText.text = answer
 
     --creating wrong answers
-    wrongAnswerText1.text = wrongAnswer1
-    wrongAnswerText2.text = wrongAnswer2
-    wrongAnswerText3.text = wrongAnswer3
+    wrongText1.text = wrongAnswer1
+    wrongText2.text = wrongAnswer2
+    wrongText3.text = wrongAnswer3
 
 end
 
@@ -178,14 +170,14 @@ local function PositionAnswers()
         answerText.x = X1
         answerText.y = Y1
 
-        wrongAnswerText1.x = X2
-        wrongAnswerText1.y = Y1
+        wrongText1.x = X2
+        wrongText1.y = Y1
 
-        wrongAnswerText2.x = X1
-        wrongAnswerText2.y = Y2
+        wrongText2.x = X1
+        wrongText2.y = Y2
 
-        wrongAnswerText3.x = X2
-        wrongAnswerText3.y = Y2
+        wrongText3.x = X2
+        wrongText3.y = Y2
 
 
     elseif (answerPosition == 2) then
@@ -193,14 +185,14 @@ local function PositionAnswers()
         answerText.x = X2
         answerText.y = Y2
 
-        wrongAnswerText1.x = X1
-        wrongAnswerText1.y = Y1
+        wrongText1.x = X1
+        wrongText1.y = Y1
 
-        wrongAnswerText2.x = X2
-        wrongAnswerText2.y = Y1
+        wrongText2.x = X2
+        wrongText2.y = Y1
 
-        wrongAnswerText3.x = X1
-        wrongAnswerText3.y = Y2
+        wrongText3.x = X1
+        wrongText3.y = Y2
 
 
     elseif (answerPosition == 3) then
@@ -208,28 +200,28 @@ local function PositionAnswers()
         answerText.x = X1
         answerText.y = Y2
 
-        wrongAnswerText1.x = X2
-        wrongAnswerText1.y = Y2
+        wrongText1.x = X2
+        wrongText1.y = Y2
 
-        wrongAnswerText2.x = X1
-        wrongAnswerText2.y = Y1
+        wrongText2.x = X1
+        wrongText2.y = Y1
 
-        wrongAnswerText3.x = X2
-        wrongAnswerText3.y = Y1
+        wrongText3.x = X2
+        wrongText3.y = Y1
 
     elseif (answerPosition == 4) then
 
         answerText.x = X2
         answerText.y = Y1
 
-        wrongAnswerText1.x = X1
-        wrongAnswerText1.y = Y2
+        wrongText1.x = X1
+        wrongText1.y = Y2
 
-        wrongAnswerText2.x = X2
-        wrongAnswerText2.y = Y2
+        wrongText2.x = X2
+        wrongText2.y = Y2
 
-        wrongAnswerText3.x = X1
-        wrongAnswerText3.y = Y1
+        wrongText3.x = X1
+        wrongText3.y = Y1
 
     end
 end
@@ -266,12 +258,12 @@ function scene:create( event )
     answerText = display.newText("", X1, Y2, Arial, 75)
     answerText.anchorX = 0
 
-    wrongAnswerText1 = display.newText("", X2, Y2, Arial, 75)
-    wrongAnswerText1.anchorX = 0
-    wrongAnswerText2 = display.newText("", X1, Y1, Arial, 75)
-    wrongAnswerText2.anchorX = 0
-    wrongAnswerText3 = display.newText("", X1, Y1, Arial, 75)
-    wrongAnswerText3.anchorX = 0
+    wrongText1 = display.newText("", X2, Y2, Arial, 75)
+    wrongText1.anchorX = 0
+    wrongText2 = display.newText("", X1, Y1, Arial, 75)
+    wrongText2.anchorX = 0
+    wrongText3 = display.newText("", X1, Y1, Arial, 75)
+    wrongText3.anchorX = 0
 
     wrongText1 = display.newText("", X2, Y2, Arial, 75)
     wrongText1.anchorX = 0
@@ -288,9 +280,9 @@ function scene:create( event )
     sceneGroup:insert(cover)
     sceneGroup:insert(questionText)
     sceneGroup:insert(answerText)
-    sceneGroup:insert(wrongAnswerText1)
-    sceneGroup:insert(wrongAnswerText2)
-    sceneGroup:insert(wrongAnswerText3)
+    sceneGroup:insert(wrongText1)
+    sceneGroup:insert(wrongText2)
+    sceneGroup:insert(wrongText3)
 
 end --function scene:create( event )
 
