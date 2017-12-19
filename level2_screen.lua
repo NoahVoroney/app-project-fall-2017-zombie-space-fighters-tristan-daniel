@@ -615,7 +615,7 @@ function scene:show( event )
 
         L1SoundChannel = audio.play(L1Music )
 
-        numLives = 3
+        
         questionsAnswered = 0
 
         -- make all zombies visible
