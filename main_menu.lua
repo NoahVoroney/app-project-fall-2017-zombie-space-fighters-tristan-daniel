@@ -36,6 +36,7 @@ local scene = composer.newScene( sceneName )
 local bkg_image
 local playButton
 local creditsButton
+local storeButton
 local instructionsButton
 local MenuSound = audio.loadSound("Sounds/MainMenuMusic.mp3")
 local MenuSoundChannel
