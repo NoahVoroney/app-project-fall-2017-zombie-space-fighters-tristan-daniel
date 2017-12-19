@@ -76,10 +76,6 @@ local YouWin
 
 local zombie2
 local zombie3
---local zombie4
---local zombie5
---local zombie6
---local theZombie
 
 local questionsAnswered = 0
 
@@ -301,10 +297,10 @@ local function AddPhysicsBodies()
     physics.addBody( platform1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+--    physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform5, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform6, "static", { density=1.0, friction=0.3, bounce=0.2 } )
-    physics.addBody( platform7, "static", { density=1.0, friction=0.3, bounce=0.2 } )
+--    physics.addBody( platform7, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -320,10 +316,10 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform1)
     physics.removeBody(platform2)
     physics.removeBody(platform3)
-    physics.removeBody(platform4)
+--    physics.removeBody(platform4)
     physics.removeBody(platform5)
     physics.removeBody(platform6)
-    physics.removeBody(platform7)
+--    physics.removeBody(platform7)
 
     physics.removeBody(leftW)
     physics.removeBody(rightW)
@@ -436,11 +432,11 @@ function scene:create( event )
         
     sceneGroup:insert( platform3 )
 
-    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
-    platform4.x = display.contentWidth *4.7 / 5
-    platform4.y = display.contentHeight * 1.3 / 5
+--    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
+--    platform4.x = display.contentWidth *4.7 / 5
+--    platform4.y = display.contentHeight * 1.3 / 5
         
-    sceneGroup:insert( platform4 )
+--    sceneGroup:insert( platform4 )
 
 
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
@@ -457,11 +453,11 @@ function scene:create( event )
     sceneGroup:insert( platform6)
 
 
-    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
-    platform7.x = display.contentWidth * 5.8 / 8
-    platform7.y = display.contentHeight * 0.4 / 5
+--    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
+--    platform7.x = display.contentWidth * 5.8 / 8
+--    platform7.y = display.contentHeight * 0.4 / 5
         
-    sceneGroup:insert( platform7)
+--    sceneGroup:insert( platform7)
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
