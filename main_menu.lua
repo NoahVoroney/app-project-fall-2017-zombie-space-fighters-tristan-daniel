@@ -36,7 +36,7 @@ local scene = composer.newScene( sceneName )
 local bkg_image
 local playButton
 local creditsButton
-local storeButton
+--local storeButton
 local instructionsButton
 local MenuSound = audio.loadSound("Sounds/MainMenuMusic.mp3")
 local MenuSoundChannel
@@ -130,19 +130,19 @@ function scene:create( event )
         } ) 
 
         -- Creating Store Button
-    storeButton = widget.newButton( 
-        {
+--    storeButton = widget.newButton( 
+--        {
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth*7/8,
-            y = display.contentHeight/2,
+--            x = display.contentWidth*7/8,
+--            y = display.contentHeight/2,
 
             -- Insert the images here
-            defaultFile = "Images/StoreButtonUnpressed@2x.png",
-            overFile = "Images/StoreButtonPressed@2x.png",
+--            defaultFile = "Images/StoreButtonUnpressed@2x.png",
+--            overFile = "Images/StoreButtonPressed@2x.png",
 
             -- When the button is released, call the Credits transition function
-            onRelease = CreditsTransition
-        } ) 
+--            onRelease = CreditsTransition
+--        } ) 
     
     -- ADD INSTRUCTIONS BUTTON WIDGET
 
@@ -164,13 +164,12 @@ function scene:create( event )
     -- Associating button widgets with this scene
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
-    sceneGroup:insert( storeButton )
+--    sceneGroup:insert( storeButton )
     
     
     -- INSERT INSTRUCTIONS BUTTON INTO SCENE GROUP
     sceneGroup:insert( instructionsButton )
 end -- function scene:create( event )   
-
 
 
 -----------------------------------------------------------------------------------------
@@ -256,5 +255,6 @@ scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
 
 -----------------------------------------------------------------------------------------
+
 
 return scene
