@@ -57,7 +57,7 @@ local heart1
 local heart2
 local heart3
 
-local rArrow 
+local rArrow
 local lArrow
 local uArrow
 
@@ -66,7 +66,7 @@ local SPEED = 3
 local LINEAR_VELOCITY = -350
 local GRAVITY =24
 
-local leftW 
+local leftW
 local rightW
 local topW
 local floor
@@ -103,8 +103,8 @@ local function left (touch)
   motionx = -SPEED
   character.xScale = -1
 end
- 
- 
+
+
 -- When right arrow is touched, move character right
 local function right (touch)
     --if (character ~= nil) then
@@ -126,7 +126,7 @@ local function movePlayer (event)
         character.x = character.x + motionx
     end
 end
- 
+
 -- Stop character movement when no arrow is pushed
 local function stop (event)
     if (event.phase =="ended") then
@@ -212,10 +212,10 @@ local function Level2Transition( )
 end
 
 local function onCollision( self, event )
- 
+
     if  (event.target.myName == "zombie2") or
         (event.target.myName == "zombie3") then
-          
+
         theZombie = event.target
 
         -- stop the character from moving
@@ -239,7 +239,7 @@ local function onCollision( self, event )
         end
 
     end
-  
+
 end
 
 
@@ -249,7 +249,7 @@ local function lifeTaker()
         heart1.isVisible = true
         heart2.isVisible = true
         heart3.isVisible = true
-            
+
         elseif (numLives == 2) then
                 -- update hearts
             heart1.isVisible = true
@@ -262,7 +262,7 @@ local function lifeTaker()
             heart1.isVisible = true
             heart2.isVisible = false
             heart3.isVisible = false
-            --timer.performWithDelay(200, ReplaceCharacter) 
+            --timer.performWithDelay(200, ReplaceCharacter)
 
         elseif (numLives == 0) then
                 -- update hearts
@@ -274,24 +274,24 @@ local function lifeTaker()
 end
 
 local function AddCollisionListeners()
-    
-     --when character collides with zombie, onCollision will be called    
+
+     --when character collides with zombie, onCollision will be called
         zombie2.collision = onCollision
         zombie2:addEventListener( "collision" )
         zombie3.collision = onCollision
         zombie3:addEventListener( "collision" )
-       
+
 end
 
 local function RemoveCollisionListeners()
-  
+
     zombie2:removeEventListener( "collision" )
     zombie3:removeEventListener( "collision" )
- 
+
 end
 
 local function AddPhysicsBodies()
-    
+
 
     --add to the physics engine
     physics.addBody( platform1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
@@ -309,7 +309,7 @@ local function AddPhysicsBodies()
 
     physics.addBody(zombie2, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody(zombie3, "static",  {density=0, friction=0, bounce=0} )
-   
+
 end
 
 local function RemovePhysicsBodies()
@@ -325,7 +325,7 @@ local function RemovePhysicsBodies()
     physics.removeBody(rightW)
     physics.removeBody(topW)
     physics.removeBody(floor)
- 
+
 end
 
 
@@ -344,15 +344,15 @@ function ResumeGame()
     lifeTaker()
 
     --character back to initial pos
-  
+
     -- make character visible again
     character.isVisible = true
-    
+
 
     if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
         print ("***Removed theZombie " .. theZombie.myName)
         theZombie.isVisible = false
-        physics.removeBody(theZombie)              
+        physics.removeBody(theZombie)
     end
 
 end
@@ -373,18 +373,18 @@ function scene:create( event )
 
     -- Insert the background image
     bkg_image = display.newImageRect("Images/Level1Background.png", display.contentWidth, display.contentHeight)
-    bkg_image.x = display.contentWidth / 2 
+    bkg_image.x = display.contentWidth / 2
     bkg_image.y = display.contentHeight / 2
 
     -- Insert background image into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( bkg_image )  
+    sceneGroup:insert( bkg_image )
 
 
 
 
     -- Creating Back Button
     --==============================================================================
-    backButton = widget.newButton( 
+    backButton = widget.newButton(
     {
         -- Setting Position
         x = display.contentWidth*1/8,
@@ -395,8 +395,8 @@ function scene:create( event )
         -- height = 106,
 
         -- Setting Visual Properties
-        defaultFile = "Images/BackButtonUnpressed.png",
-        overFile = "Images/BackButtonPressed.png",
+        defaultFile = "Images/LevelFinishButton.png",
+        overFile = "Images/LevelFinishButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = WinTransition
@@ -405,59 +405,75 @@ function scene:create( event )
 
     backButton.isVisible = false
 
-    
+
 
     -- Associating Buttons with this scene
     sceneGroup:insert( backButton )
     --==========================================================================
-    
+
 
 
     -- Insert the platforms
     platform1 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform1.x = display.contentWidth * 1 / 8
     platform1.y = display.contentHeight * 1.6 / 4
-        
+
     sceneGroup:insert( platform1 )
 
     platform2 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     platform2.x = display.contentWidth /2.1
     platform2.y = display.contentHeight * 1.2 / 4
-        
+
     sceneGroup:insert( platform2 )
 
     platform3 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
     platform3.x = display.contentWidth *3 / 5
     platform3.y = display.contentHeight * 3.5 / 5
-        
+
     sceneGroup:insert( platform3 )
 
+<<<<<<< HEAD
 --    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
 --    platform4.x = display.contentWidth *4.7 / 5
 --    platform4.y = display.contentHeight * 1.3 / 5
         
 --    sceneGroup:insert( platform4 )
+=======
+    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
+    platform4.x = display.contentWidth *4.7 / 5
+    platform4.y = display.contentHeight * 1.3 / 5
+
+    sceneGroup:insert( platform4 )
+>>>>>>> 7a84315ad15cda051394b96235c601bdd1b16974
 
 
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform5.x = display.contentWidth * 3 / 8
     platform5.y = display.contentHeight * 2.8 / 5
-        
+
     sceneGroup:insert( platform5)
 
 
     platform6 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     platform6.x = display.contentWidth * 6 / 8
     platform6.y = display.contentHeight * 2.2 / 5
-        
+
     sceneGroup:insert( platform6)
 
 
+<<<<<<< HEAD
 --    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
 --    platform7.x = display.contentWidth * 5.8 / 8
 --    platform7.y = display.contentHeight * 0.4 / 5
         
 --    sceneGroup:insert( platform7)
+=======
+    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
+    platform7.x = display.contentWidth * 5.8 / 8
+    platform7.y = display.contentHeight * 0.4 / 5
+
+    sceneGroup:insert( platform7)
+>>>>>>> 7a84315ad15cda051394b96235c601bdd1b16974
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
@@ -491,7 +507,7 @@ function scene:create( event )
     lArrow = display.newImageRect("Images/LeftArrowUnpressed.png", 100, 50)
     lArrow.x = display.contentWidth * 7.2 / 10
     lArrow.y = display.contentHeight * 9.5 / 10
-   
+
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( rArrow)
     sceneGroup:insert( lArrow)
@@ -528,7 +544,7 @@ function scene:create( event )
     floor = display.newImageRect("Images/Level-1Floor.png", 1024, 100)
     floor.x = display.contentCenterX
     floor.y = display.contentHeight * 1.05
-    
+
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( floor )
@@ -536,7 +552,7 @@ function scene:create( event )
     -- You Lose screen
     YouLose = display.newImageRect ("Images/YouLose.png", display.contentWidth, display.contentHeight)
     YouLose.isVisible = false
-    YouLose.x = display.contentWidth / 2 
+    YouLose.x = display.contentWidth / 2
     YouLose.y = display.contentHeight / 2
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
@@ -545,7 +561,7 @@ function scene:create( event )
     -- You Win screen
     YouWin = display.newImageRect ("Images/YouWin.png", display.contentWidth, display.contentHeight)
     YouWin.isVisible = false
-    YouWin.x = display.contentWidth / 2 
+    YouWin.x = display.contentWidth / 2
     YouWin.y = display.contentHeight / 2
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
@@ -603,7 +619,7 @@ function scene:show( event )
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
 
-        L1SoundChannel = audio.play(L1Music )  
+        L1SoundChannel = audio.play(L1Music )
 
         numLives = 3
         questionsAnswered = 0
@@ -629,6 +645,9 @@ function scene:show( event )
         lifeTaker()
 
         backvisible()
+
+        backButton.isVisible = false
+
 
     end
 

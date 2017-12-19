@@ -401,8 +401,8 @@ function scene:create( event )
         -- height = 106,
 
         -- Setting Visual Properties
-        defaultFile = "Images/BackButtonUnpressed.png",
-        overFile = "Images/BackButtonPressed.png",
+        defaultFile = "Images/LevelFinishButton.png",
+        overFile = "Images/LevelFinishButtonPressed.png",
 
         -- Setting Functional Properties
         onRelease = WinTransition
@@ -639,6 +639,9 @@ function scene:show( event )
         lifeTaker()
 
         backvisible()
+
+        backButton.isVisible = false
+
 
     end
 
