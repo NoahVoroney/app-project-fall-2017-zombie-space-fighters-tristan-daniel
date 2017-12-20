@@ -61,6 +61,9 @@ local Y2 = display.contentHeight*5.5/7
 
 local textTouched = false
 
+
+-----GLOUBAl VARIABLE
+points = 0
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -78,6 +81,7 @@ local function TouchListenerAnswer(touch)
     if (touch.phase == "ended") then
 
        BackToLevel1( )
+       points = points + 1
    end
 end
 

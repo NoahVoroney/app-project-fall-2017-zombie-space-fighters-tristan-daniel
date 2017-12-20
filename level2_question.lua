@@ -1,16 +1,15 @@
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 --
--- level1_screen.lua
+-- level2_screen.lua
 -- Created by: Allison
--- Date: May 16, 2017
--- Description: This is the level 1 screen of the game. the charater can be dragged to move
---If character goes off a certain araea they go back to the start. When a user interactes
---with piant a trivia question will come up. they will have a limided time to click on the answer
------------------------------------------------------------------------------------------
+-- Hijacked by: Daniel Finger
+-- Date: In the not too distant future
+-- Description: h
+-------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- INITIALIZATIONS
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 -- Use Composer Libraries
 local composer = require( "composer" )
@@ -18,19 +17,19 @@ local widget = require( "widget" )
 local physics = require( "physics")
 
 
------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 -- Naming Scene
 sceneName = "level2_question"
 
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 -- Creating Scene Object
 local scene = composer.newScene( sceneName )
 
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- LOCAL VARIABLES
------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 -- The local variables for this scene
 local questionText
@@ -67,9 +66,14 @@ local textTouched = false
 local popSound = audio.loadSound( "Sounds/Pop.mp3")
 local popSoundChannel
 
------------------------------------------------------------------------------------------
+-----------------------------------------
+--GLOBAL variables
+-----------------------------------------
+
+
+-----------------------------------------------------------------------------
 --LOCAL FUNCTIONS
------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 local function BackToLevel2()
     composer.hideOverlay("crossFade", 400 )
@@ -104,8 +108,6 @@ local function StartTimer()
       countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
 end
 
-
-
 local function TouchListenerAnswer(touch)
 
     userAnswer = answerText.text
@@ -113,6 +115,7 @@ local function TouchListenerAnswer(touch)
     if (touch.phase == "ended") then
 
        BackToLevel2( )
+       points = points + 1
    end
 end
 

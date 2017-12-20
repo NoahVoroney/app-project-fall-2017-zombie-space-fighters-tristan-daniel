@@ -167,7 +167,7 @@ local function ReplaceCharacter()
     character.y = display.contentHeight  * 0.1 / 3
     character.width = 75
     character.height = 100
-    character.myName = "KickyKat"
+    character.myName = "SpessMan"
 
     -- intialize horizontal movement of character
     motionx = 0
@@ -615,7 +615,7 @@ function scene:show( event )
 
         L1SoundChannel = audio.play(L1Music )
 
-        
+
         questionsAnswered = 0
 
         -- make all zombies visible
