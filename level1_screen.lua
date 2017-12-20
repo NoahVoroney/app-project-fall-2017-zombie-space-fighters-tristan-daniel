@@ -430,7 +430,7 @@ function scene:create( event )
 
     sceneGroup:insert( platform3 )
 
-<<<<<<< HEAD
+
 
 --    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
 --    platform4.x = display.contentWidth *4.7 / 5
@@ -438,17 +438,13 @@ function scene:create( event )
 
 --    sceneGroup:insert( platform4 )
 
-=======
->>>>>>> bb346ee7958a70373aa54eb51d8799253b038ed6
+
     platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
     platform4.x = display.contentWidth *4.7 / 5
     platform4.y = display.contentHeight * 1.3 / 5
 
     sceneGroup:insert( platform4 )
-<<<<<<< HEAD
 
-=======
->>>>>>> bb346ee7958a70373aa54eb51d8799253b038ed6
 
 
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
@@ -465,7 +461,7 @@ function scene:create( event )
     sceneGroup:insert( platform6)
 
 
-<<<<<<< HEAD
+
 
 --    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
 --    platform7.x = display.contentWidth * 5.8 / 8
@@ -473,17 +469,15 @@ function scene:create( event )
 
 --    sceneGroup:insert( platform7)
 
-=======
->>>>>>> bb346ee7958a70373aa54eb51d8799253b038ed6
+
     platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
     platform7.x = display.contentWidth * 5.8 / 8
     platform7.y = display.contentHeight * 0.4 / 5
 
     sceneGroup:insert( platform7)
-<<<<<<< HEAD
 
-=======
->>>>>>> bb346ee7958a70373aa54eb51d8799253b038ed6
+
+
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
