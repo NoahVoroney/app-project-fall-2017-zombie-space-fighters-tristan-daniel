@@ -48,7 +48,6 @@ local platform5
 local platform6
 local platform7
 
-
 --local door
 --local door2
 local character
@@ -89,6 +88,8 @@ local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
 local backButton
+
+
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -233,6 +234,8 @@ local function onCollision( self, event )
         -- Increment questions answered
         questionsAnswered = questionsAnswered + 1
 
+
+
         if (questionsAnswered == 2) then
             backButton.isVisible = true
 
@@ -337,6 +340,7 @@ end
 -----------------------------------------------------------------------------------------
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
+
 
 function ResumeGame()
 
