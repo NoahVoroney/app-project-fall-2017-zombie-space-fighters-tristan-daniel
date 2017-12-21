@@ -20,7 +20,7 @@ local physics = require("physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_screen"
+sceneName = "level3_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -378,7 +378,7 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Insert the background image
-    bkg_image = display.newImageRect("Images/Level2Background.png", display.contentWidth, display.contentHeight)
+    bkg_image = display.newImageRect("Images/Level3Screen.png", display.contentWidth, display.contentHeight)
     bkg_image.x = display.contentWidth / 2
     bkg_image.y = display.contentHeight / 2
 
