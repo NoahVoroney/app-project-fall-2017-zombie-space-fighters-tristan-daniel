@@ -48,9 +48,6 @@ local platform5
 local platform6
 local platform7
 
-
---local door
---local door2
 local character
 
 local heart1
@@ -93,6 +90,7 @@ local backButton
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
+
 local function WinTransition( )
     composer.gotoScene( "you_win", {effect = "fromBottom", time = 500})
 end
@@ -133,7 +131,6 @@ local function stop (event)
         motionx = 0
     end
 end
--- Runtime:addEventListener("touch", stop )
 
 local function AddArrowEventListeners()
     rArrow:addEventListener("touch", right)
@@ -252,14 +249,12 @@ local function lifeTaker()
             heart1.isVisible = true
             heart2.isVisible = true
             heart3.isVisible = false
-            --timer.performWithDelay(200, ReplaceCharacter)
 
          elseif (numLives == 1) then
                 -- update hearts
             heart1.isVisible = true
             heart2.isVisible = false
             heart3.isVisible = false
-            --timer.performWithDelay(200, ReplaceCharacter)
 
         elseif (numLives == 0) then
                 -- update hearts
@@ -294,10 +289,8 @@ local function AddPhysicsBodies()
     physics.addBody( platform1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
---    physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform5, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform6, "static", { density=1.0, friction=0.3, bounce=0.2 } )
---    physics.addBody( platform7, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -313,10 +306,8 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform1)
     physics.removeBody(platform2)
     physics.removeBody(platform3)
---    physics.removeBody(platform4)
     physics.removeBody(platform5)
     physics.removeBody(platform6)
---    physics.removeBody(platform7)
 
     physics.removeBody(leftW)
     physics.removeBody(rightW)
@@ -428,22 +419,11 @@ function scene:create( event )
 
     sceneGroup:insert( platform3 )
 
-
-
---    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
---    platform4.x = display.contentWidth *4.7 / 5
---    platform4.y = display.contentHeight * 1.3 / 5
-
---    sceneGroup:insert( platform4 )
-
-
     platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
     platform4.x = display.contentWidth *4.7 / 5
     platform4.y = display.contentHeight * 1.3 / 5
 
     sceneGroup:insert( platform4 )
-
-
 
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform5.x = display.contentWidth * 3 / 8
@@ -451,31 +431,17 @@ function scene:create( event )
 
     sceneGroup:insert( platform5)
 
-
     platform6 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     platform6.x = display.contentWidth * 6 / 8
     platform6.y = display.contentHeight * 2.2 / 5
 
     sceneGroup:insert( platform6)
 
-
-
-
---    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
---    platform7.x = display.contentWidth * 5.8 / 8
---    platform7.y = display.contentHeight * 0.4 / 5
-
---    sceneGroup:insert( platform7)
-
-
     platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
     platform7.x = display.contentWidth * 5.8 / 8
     platform7.y = display.contentHeight * 0.4 / 5
 
     sceneGroup:insert( platform7)
-
-
-
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
@@ -542,11 +508,9 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( topW )
 
-
     floor = display.newImageRect("Images/Level-1Floor.png", 1024, 100)
     floor.x = display.contentCenterX
     floor.y = display.contentHeight * 1.05
-
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( floor )
@@ -577,7 +541,6 @@ function scene:create( event )
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie2 )
-
 
     --zombie3
     zombie3 = display.newImageRect ("Images/Zombie.png", 70, 70)
@@ -701,6 +664,7 @@ function scene:destroy( event )
     -- Example: remove display objects, save state, etc.
 
 end -- function scene:destroy( event )
+
 
 -----------------------------------------------------------------------------------------
 -- EVENT LISTENERS
