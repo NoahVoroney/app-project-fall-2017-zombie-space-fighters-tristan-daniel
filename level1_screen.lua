@@ -227,9 +227,6 @@ local function onCollision( self, event )
         -- show overlay with math question
         composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
 
-        -- remove the character from the scene
-        --display.remove(character)
-
         -- Increment questions answered
         questionsAnswered = questionsAnswered + 1
 
@@ -343,8 +340,6 @@ function ResumeGame()
     --updates lives
     lifeTaker()
 
-    --character back to initial pos
-
     -- make character visible again
     character.isVisible = true
 
@@ -354,6 +349,9 @@ function ResumeGame()
         theZombie.isVisible = false
         physics.removeBody(theZombie)
     end
+
+        -- make character visible again
+    character.isVisible = true
 
 end
 
