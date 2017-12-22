@@ -48,8 +48,6 @@ local platform5
 local platform6
 local platform7
 
---local door
---local door2
 local character
 
 local heart1
@@ -88,7 +86,6 @@ local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
 local backButton
-
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
@@ -316,10 +313,9 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform1)
     physics.removeBody(platform2)
     physics.removeBody(platform3)
---    physics.removeBody(platform4)
     physics.removeBody(platform5)
     physics.removeBody(platform6)
---    physics.removeBody(platform7)
+
 
     physics.removeBody(leftW)
     physics.removeBody(rightW)
@@ -358,10 +354,7 @@ function ResumeGame()
     character.isVisible = true
 
 end
-
-
-
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
@@ -380,9 +373,6 @@ function scene:create( event )
 
     -- Insert background image into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( bkg_image )
-
-
-
 
     -- Creating Back Button
     backButton = widget.newButton(
@@ -406,12 +396,8 @@ function scene:create( event )
 
     backButton.isVisible = false
 
-
-
     -- Associating Buttons with this scene
     sceneGroup:insert( backButton )
-
-
 
     -- Insert the platforms
     platform1 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
@@ -432,22 +418,11 @@ function scene:create( event )
 
     sceneGroup:insert( platform3 )
 
-
-
---    platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
---    platform4.x = display.contentWidth *4.7 / 5
---    platform4.y = display.contentHeight * 1.3 / 5
-
---    sceneGroup:insert( platform4 )
-
-
     platform4 = display.newImageRect("Images/Level-1Platform1.png", 180, 50)
     platform4.x = display.contentWidth *4.7 / 5
     platform4.y = display.contentHeight * 1.3 / 5
 
     sceneGroup:insert( platform4 )
-
-
 
     platform5 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
     platform5.x = display.contentWidth * 3 / 8
@@ -462,24 +437,11 @@ function scene:create( event )
 
     sceneGroup:insert( platform6)
 
-
-
-
---    platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
---    platform7.x = display.contentWidth * 5.8 / 8
---    platform7.y = display.contentHeight * 0.4 / 5
-
---    sceneGroup:insert( platform7)
-
-
     platform7 = display.newImageRect("Images/Level-1Platform2.png", 50, 150)
     platform7.x = display.contentWidth * 5.8 / 8
     platform7.y = display.contentHeight * 0.4 / 5
 
     sceneGroup:insert( platform7)
-
-
-
 
     -- Insert the Hearts
     heart1 = display.newImageRect("Images/Lives.png", 80, 80)
@@ -546,11 +508,9 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( topW )
 
-
     floor = display.newImageRect("Images/Level-1Floor.png", 1024, 100)
     floor.x = display.contentCenterX
     floor.y = display.contentHeight * 1.05
-
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( floor )
@@ -582,7 +542,6 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie2 )
 
-
     --zombie3
     zombie3 = display.newImageRect ("Images/Zombie.png", 70, 70)
     zombie3.x = 490
@@ -592,12 +551,7 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie3 )
 
-
 end --function scene:create( event )
-
-
-
-
 -----------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to appear on screen
@@ -674,7 +628,6 @@ function scene:hide( event )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
-
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
