@@ -86,10 +86,10 @@ local youWinSound = audio.loadSound("Sounds/Cheer.m4a")
 local youWinSoundChannel
 
 local backButton
-
 -----------------------------------------------------------------------------------------
 -- LOCAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
+
 
 local function WinTransition( )
     composer.gotoScene( "you_win", {effect = "fromBottom", time = 500})
@@ -131,7 +131,6 @@ local function stop (event)
         motionx = 0
     end
 end
--- Runtime:addEventListener("touch", stop )
 
 local function AddArrowEventListeners()
     rArrow:addEventListener("touch", right)
@@ -228,8 +227,6 @@ local function onCollision( self, event )
         -- Increment questions answered
         questionsAnswered = questionsAnswered + 1
 
-
-
         if (questionsAnswered == 2) then
             backButton.isVisible = true
 
@@ -252,14 +249,12 @@ local function lifeTaker()
             heart1.isVisible = true
             heart2.isVisible = true
             heart3.isVisible = false
-            --timer.performWithDelay(200, ReplaceCharacter)
 
          elseif (numLives == 1) then
                 -- update hearts
             heart1.isVisible = true
             heart2.isVisible = false
             heart3.isVisible = false
-            --timer.performWithDelay(200, ReplaceCharacter)
 
         elseif (numLives == 0) then
                 -- update hearts
@@ -294,10 +289,8 @@ local function AddPhysicsBodies()
     physics.addBody( platform1, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform2, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform3, "static", { density=1.0, friction=0.3, bounce=0.2 } )
---    physics.addBody( platform4, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform5, "static", { density=1.0, friction=0.3, bounce=0.2 } )
     physics.addBody( platform6, "static", { density=1.0, friction=0.3, bounce=0.2 } )
---    physics.addBody( platform7, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
@@ -316,7 +309,6 @@ local function RemovePhysicsBodies()
     physics.removeBody(platform5)
     physics.removeBody(platform6)
 
-
     physics.removeBody(leftW)
     physics.removeBody(rightW)
     physics.removeBody(topW)
@@ -333,7 +325,6 @@ end
 -----------------------------------------------------------------------------------------
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
-
 
 function ResumeGame()
 
@@ -429,7 +420,6 @@ function scene:create( event )
     platform5.y = display.contentHeight * 2.8 / 5
 
     sceneGroup:insert( platform5)
-
 
     platform6 = display.newImageRect("Images/Level-1Platform1.png", 150, 50)
     platform6.x = display.contentWidth * 6 / 8
@@ -658,6 +648,7 @@ function scene:destroy( event )
     -- Example: remove display objects, save state, etc.
 
 end -- function scene:destroy( event )
+
 
 -----------------------------------------------------------------------------------------
 -- EVENT LISTENERS
