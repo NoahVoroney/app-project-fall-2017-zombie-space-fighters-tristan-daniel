@@ -30,7 +30,6 @@ local scene = composer.newScene( sceneName )
 
 -- local variables for the scene
 local bkg
-
 ----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
@@ -38,7 +37,7 @@ local bkg
 -----------------------------------------------------------------------------------------
 
 local function MenuTransition( )
-    
+
     composer.gotoScene( "level2_screen", {effect = "fromBottom", time = 500})
 end
 
@@ -58,11 +57,11 @@ function scene:create( event )
     bkg.y = display.contentCenterY
     bkg.width = display.contentWidth
     bkg.height = display.contentHeight
-   
-    -- Associating display objects with this scene 
+
+    -- Associating display objects with this scene
     sceneGroup:insert( bkg )
 
-end    
+end
 
 
 
@@ -96,7 +95,7 @@ function scene:show( event )
         -- Example: start timers, begin animation, play audio, etc.
         --youLose1SoundChannel = audio.play( youLose1 )
 
-        timer.performWithDelay ( 3000, MenuTransition)  
+        timer.performWithDelay ( 3000, MenuTransition)
 
 
 
@@ -160,4 +159,3 @@ scene:addEventListener( "destroy", scene )
 -----------------------------------------------------------------------------------------
 
 return scene
-
