@@ -1,10 +1,10 @@
 -----------------------------------------------------------------------------------------
 --
 -- splash_screen.lua
--- Created by: Daniel F
--- Date: December 22 2017
--- Description: This is the splash screen of the game. It displays the
--- company logo that is a company logo
+-- Created by: Your Name
+-- Date: Month Day, Year
+-- Description: This is the splash screen of the game. It displays the 
+-- company logo that...
 -----------------------------------------------------------------------------------------
 
 -- Use Composer Library
@@ -21,7 +21,7 @@ local scene = composer.newScene( sceneName )
 ----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
-
+ 
 -- The local variables for this scene
 local logo
 local logoSounds = audio.loadSound("Sounds/introSound.mp3")
@@ -35,15 +35,15 @@ local myText
 
 -- The function that moves the logo across the screen
 local function movelogo()
-
+  
     logo.alpha = logo.alpha + 0.01
 
-
+    
 end
 
--- The function that will go to the main menu
+-- The function that will go to the main menu 
 local function gotoMainMenu()
-    composer.gotoScene( "level2_screen" )
+    composer.gotoScene( "main_menu" )
 end
 
 -----------------------------------------------------------------------------------------
@@ -56,11 +56,8 @@ function scene:create( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
 
-    bkg_image = display.newImageRect("Images/Level1Cutscene.png", display.contentWidth, display.contentHeight)
-    bkg_image.x = display.contentWidth / 2
-    bkg_image.y = display.contentHeight / 2
-
-    sceneGroup:insert( bkg_image )
+    -- set the background to be black
+    display.setDefault("background", 0, 0, 0)
 
     -- Insert the logo image
     logo = display.newImageRect("Images/Companylogo.png", 360, 350)
@@ -97,7 +94,7 @@ function scene:show( event )
 
     -- Called when the scene is still off screen (but is about to come on screen).
     if ( phase == "will" ) then
-
+       
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
@@ -108,8 +105,8 @@ function scene:show( event )
         Runtime:addEventListener("enterFrame", movelogo)
 
         -- Go to the main menu screen after the given time.
-        timer.performWithDelay ( 3000, gotoMainMenu)
-
+        timer.performWithDelay ( 3000, gotoMainMenu)          
+        
     end
 
 end --function scene:show( event )
@@ -128,13 +125,13 @@ function scene:hide( event )
     -- Called when the scene is on screen (but is about to go off screen).
     -- Insert code here to "pause" the scene.
     -- Example: stop timers, stop animation, stop audio, etc.
-    if ( phase == "will" ) then
+    if ( phase == "will" ) then  
 
     -----------------------------------------------------------------------------------------
 
     -- Called immediately after scene goes off screen.
     elseif ( phase == "did" ) then
-
+        
         -- stop the jungle sounds channel for this screen
         audio.stop(logoSoundsChannel)
     end
