@@ -35,6 +35,9 @@ local scene = composer.newScene( sceneName )
 -- The local variables for this scene
 local questionText
 
+local correctObject
+local incorrectObject
+
 local firstNumber
 local secondNumber
 
@@ -62,6 +65,8 @@ local Y2 = display.contentHeight*5.5/7
 local textTouched = false
 
 
+
+
 -----GLOUBAl VARIABLE
 points = 0
 -----------------------------------------------------------------------------------------
@@ -69,6 +74,8 @@ points = 0
 -----------------------------------------------------------------------------------------
 --making transition to next scene
 local function BackToLevel1()
+    correctObject.isVisible = false
+    incorrectObject.isVisible = false
     composer.hideOverlay("crossFade", 400 )
 
     ResumeGame()
@@ -79,9 +86,11 @@ local function TouchListenerAnswer(touch)
     userAnswer = answerText.text
 
     if (touch.phase == "ended") then
+        points = points + 1
+        correctObject.isVisible = true
+        timer.performWithDelay ( 1000, BackToLevel1)   
 
-       BackToLevel1( )
-       points = points + 1
+
    end
 end
 
@@ -91,8 +100,8 @@ local function TouchListenerWrongAnswer(touch)
     if (touch.phase == "ended") then
 
         numLives = numLives - 1
-
-        BackToLevel1( )
+        incorrectObject.isVisible = true
+        timer.performWithDelay ( 1000, BackToLevel1)   
     end
 end
 
@@ -102,8 +111,8 @@ local function TouchListenerWrongAnswer2(touch)
 
     if (touch.phase == "ended") then
         numLives = numLives - 1
-
-        BackToLevel1( )
+        incorrectObject.isVisible = true
+        timer.performWithDelay ( 1000, BackToLevel1)
 
     end
 end
@@ -113,9 +122,8 @@ local function TouchListenerWrongAnswer3(touch)
 
     if (touch.phase == "ended") then
         numLives = numLives - 1
-
-        BackToLevel1( )
-
+        incorrectObject.isVisible = true
+        timer.performWithDelay ( 1000, BackToLevel1)
     end
 end
 
@@ -230,6 +238,12 @@ local function PositionAnswers()
     end
 end
 
+local function HideCorrectAndIncorrect()
+    correctObject.isVisible = false
+    incorrectObject.isVisible = false
+end
+
+
 
 
 -----------------------------------------------------------------------------------------
@@ -253,6 +267,17 @@ function scene:create( event )
     cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth*0.8, display.contentHeight*0.95, 50 )
     --setting its colour
     cover:setFillColor(96/255, 96/255, 96/255)
+
+
+    -- display the correct text object(shows only if set to be visible) with x and y value
+    correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+    correctObject:setFillColor(0/255, 255/255, 0/255)
+
+
+    --display the incorrect text object(shows only if set to be visible) with x and y value
+    incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+    incorrectObject:setFillColor(255/255, 0/255, 0/255)
+
 
 
     -- create the question text object
@@ -287,6 +312,8 @@ function scene:create( event )
     sceneGroup:insert(wrongText1)
     sceneGroup:insert(wrongText2)
     sceneGroup:insert(wrongText3)
+    sceneGroup:insert(correctObject)
+    sceneGroup:insert(incorrectObject)
 
 end --function scene:create( event )
 
@@ -310,6 +337,7 @@ function scene:show( event )
         -- Called when the scene is now on screen.
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
+        HideCorrectAndIncorrect()
         DisplayQuestion()
         PositionAnswers()
         AddTextListeners()
@@ -359,6 +387,7 @@ function scene:destroy( event )
     -- Example: remove display objects, save state, etc.
 
 end -- function scene:destroy( event )
+
 
 -----------------------------------------------------------------------------------------
 -- EVENT LISTENERS

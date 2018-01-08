@@ -346,7 +346,7 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function ResumeGame()
+function ResumeGameLevel2()
 
     --updates lives
     lifeTaker()

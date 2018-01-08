@@ -76,9 +76,10 @@ local popSoundChannel
 -----------------------------------------------------------------------------
 
 local function BackToLevel2()
+    correctObject.isVisible = false
+    incorrectObject.isVisible = false
     composer.hideOverlay("crossFade", 400 )
-
-    ResumeGame()
+    ResumeGameLevel2()
 end
 
 --making transition to next scene
@@ -113,9 +114,9 @@ local function TouchListenerAnswer(touch)
     userAnswer = answerText.text
 
     if (touch.phase == "ended") then
-
-       BackToLevel2( )
        points = points + 1
+       timer.performWithDelay ( 1000, BackToLevel2) 
+       BackToLevel2( )
    end
 end
 
@@ -125,7 +126,7 @@ local function TouchListenerWrongAnswer(touch)
     if (touch.phase == "ended") then
 
         numLives = numLives - 1
-
+        timer.performWithDelay ( 1000, BackToLevel2) 
         popSoundChannel = audio.play(popSound)
         secondsLeft = 40
         BackToLevel2( )
@@ -140,6 +141,7 @@ local function TouchListenerWrongAnswer2(touch)
 
     if (touch.phase == "ended") then
         numLives = numLives - 1
+        timer.performWithDelay ( 1000, BackToLevel2) 
         popSoundChannel = audio.play(popSound)
         secondsLeft = 40
 
@@ -153,6 +155,7 @@ local function TouchListenerWrongAnswer3(touch)
 
     if (touch.phase == "ended") then
         numLives = numLives - 1
+        timer.performWithDelay ( 1000, BackToLevel2) 
         popSoundChannel = audio.play(popSound)
         secondsLeft = 40
 
@@ -275,7 +278,10 @@ local function PositionAnswers()
     end
 end
 
-
+local function HideCorrectAndIncorrect()
+    correctObject.isVisible = false
+    incorrectObject.isVisible = false
+end
 
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -322,6 +328,15 @@ function scene:create( event )
     clockText = display.newText(secondsLeft, 150, 80, native.systemFontBold, 80)
     clockText:setFillColor(255/255, 129/255, 7/255)
 
+    -- display the correct text object(shows only if set to be visible) with x and y value
+    correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+    correctObject:setFillColor(0/255, 255/255, 0/255)
+
+
+    --display the incorrect text object(shows only if set to be visible) with x and y value
+    incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+    incorrectObject:setFillColor(255/255, 0/255, 0/255)
+
 
     -----------------------------------------------------------------------------------------
 
@@ -334,6 +349,8 @@ function scene:create( event )
     sceneGroup:insert(wrongText2)
     sceneGroup:insert(wrongText3)
     sceneGroup:insert(clockText)
+    sceneGroup:insert(correctObject)
+    sceneGroup:insert(incorrectObject)
 
 
 
@@ -363,6 +380,7 @@ function scene:show( event )
         PositionAnswers()
         AddTextListeners()
         StartTimer()
+        HideCorrectAndIncorrect()
     end
 
 end --function scene:show( event )

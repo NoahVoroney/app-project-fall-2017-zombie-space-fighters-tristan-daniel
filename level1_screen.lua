@@ -341,8 +341,6 @@ function ResumeGame()
         physics.removeBody(theZombie)
     end
 
-        -- make character visible again
-    character.isVisible = true
 
 end
 
