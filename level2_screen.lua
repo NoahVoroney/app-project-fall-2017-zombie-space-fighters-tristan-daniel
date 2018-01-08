@@ -97,7 +97,7 @@ local backButton
 -----------------------------------------------------------------------------------------
 
 local function WinTransition( )
-    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
+    composer.gotoScene( "you_win2", {effect = "fromBottom", time = 500})
 end
 
 
@@ -200,7 +200,7 @@ local function MakeHeartsVisible()
 end
 
 local function YouLoseTransition()
-    composer.gotoScene( "you_lose" )
+    composer.gotoScene( "you_lose2" )
 end
 
 local function LevelTransition( )
@@ -347,6 +347,7 @@ end
 -----------------------------------------------------------------------------------------
 
 function ResumeGameLevel2()
+function ResumeGame2()
 
     --updates lives
     lifeTaker()

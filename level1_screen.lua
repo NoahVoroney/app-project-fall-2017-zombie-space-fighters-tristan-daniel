@@ -221,6 +221,8 @@ local function onCollision( self, event )
         -- make the character invisible
         character.isVisible = false
 
+        print ("***onCollision: made character invisible")
+
         -- show overlay with math question
         composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
 
@@ -333,6 +335,7 @@ function ResumeGame()
 
     -- make character visible again
     character.isVisible = true
+    print ("***ResumeGame: made character visible")
 
 
     if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
@@ -340,13 +343,8 @@ function ResumeGame()
         theZombie.isVisible = false
         physics.removeBody(theZombie)
     end
-
-
 end
-
-
-
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
@@ -365,9 +363,6 @@ function scene:create( event )
 
     -- Insert background image into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( bkg_image )
-
-
-
 
     -- Creating Back Button
     backButton = widget.newButton(
@@ -391,12 +386,8 @@ function scene:create( event )
 
     backButton.isVisible = false
 
-
-
     -- Associating Buttons with this scene
     sceneGroup:insert( backButton )
-
-
 
     -- Insert the platforms
     platform1 = display.newImageRect("Images/Level-1Platform1.png", 250, 50)
@@ -549,12 +540,7 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( zombie3 )
 
-
 end --function scene:create( event )
-
-
-
-
 -----------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to appear on screen
@@ -631,7 +617,6 @@ function scene:hide( event )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
-
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then

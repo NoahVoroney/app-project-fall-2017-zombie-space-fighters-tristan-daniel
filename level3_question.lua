@@ -78,7 +78,7 @@ local popSoundChannel
 local function BackToLevel3()
     composer.hideOverlay("crossFade", 400 )
 
-    ResumeGame()
+    ResumeGame3()
 end
 
 --making transition to next scene
@@ -115,7 +115,7 @@ local function TouchListenerAnswer(touch)
     if (touch.phase == "ended") then
 
        BackToLevel3( )
-       points = points + 1
+
    end
 end
 
@@ -184,20 +184,20 @@ end
 
 local function DisplayQuestion()
     --creating random numbers
-    firstNumber = math.random (9,15)
-    secondNumber = math.random (5,7)
+    firstNumber = math.random (1,5)
+    secondNumber = math.random (1,5)
 
     -- calculate answer
-    answer = firstNumber - secondNumber
+    answer = firstNumber * secondNumber
 
     -- calculate wrong answers
-    wrongAnswer1 = answer - math.random(1, 2)
-    wrongAnswer2 = answer + math.random(3, 4)
-    wrongAnswer3 = answer + math.random(8, 8)
+    wrongAnswer1 = answer + math.random(6, 8)
+    wrongAnswer2 = answer - math.random(6, 7)
+    wrongAnswer3 = answer * math.random(6, 9)
 
 
     --creating the question depending on the selcetion number
-    questionText.text = firstNumber .. " - " .. secondNumber .. " ="
+    questionText.text = firstNumber .. " x " .. secondNumber .. " ="
 
     --creating answer text from list it corispondes with the animals list
     answerText.text = answer

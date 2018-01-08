@@ -14,12 +14,10 @@ local composer = require( "composer" )
 
 local widget = require( "widget" )
 
-
-
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "you_lose"
+sceneName = "you_win2"
 
 -----------------------------------------------------------------------------------------
 
@@ -34,11 +32,20 @@ local scene = composer.newScene( sceneName )
 local bkg
 
 ----------------------------------------------------------------------------------------
+
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------------
+local function MenuTransition( )
+
+    composer.gotoScene( "level3_screen", {effect = "fromBottom", time = 500})
+end
+
+-----------------------------------------------------------------------------------------
+-- GLOBAL SCENE FUNCTIONS
+-----------------------------------------------------------------------------------------
+
 -- The function called when the screen doesn't exist
 function scene:create( event )
 
@@ -46,7 +53,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- Display background
-    bkg = display.newImage("Images/YouLose.png")
+    bkg = display.newImage("Images/YouWin.png")
     bkg.x = display.contentCenterX
     bkg.y = display.contentCenterY
     bkg.width = display.contentWidth
@@ -57,10 +64,6 @@ function scene:create( event )
 
 end
 
-local function MenuTransition( )
-
-    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
-end
 
 
 -----------------------------------------------------------------------------------------
@@ -91,8 +94,12 @@ function scene:show( event )
         -- Called when the scene is now on screen.
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
+        --youLose1SoundChannel = audio.play( youLose1 )
 
         timer.performWithDelay ( 3000, MenuTransition)
+
+
+
     end
 
 end

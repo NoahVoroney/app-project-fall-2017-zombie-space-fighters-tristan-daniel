@@ -98,7 +98,6 @@ end
 local function TouchListenerWrongAnswer(touch)
 
     if (touch.phase == "ended") then
-
         numLives = numLives - 1
         incorrectObject.isVisible = true
         timer.performWithDelay ( 1000, BackToLevel1)   

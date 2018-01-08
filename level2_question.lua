@@ -80,6 +80,8 @@ local function BackToLevel2()
     incorrectObject.isVisible = false
     composer.hideOverlay("crossFade", 400 )
     ResumeGameLevel2()
+
+    ResumeGame2()
 end
 
 --making transition to next scene
