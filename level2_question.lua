@@ -78,7 +78,7 @@ local popSoundChannel
 local function BackToLevel2()
     composer.hideOverlay("crossFade", 400 )
 
-    ResumeGame()
+    ResumeGame2()
 end
 
 --making transition to next scene

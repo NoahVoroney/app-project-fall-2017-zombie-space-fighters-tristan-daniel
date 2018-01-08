@@ -221,6 +221,8 @@ local function onCollision( self, event )
         -- make the character invisible
         character.isVisible = false
 
+        print ("***onCollision: made character invisible")
+
         -- show overlay with math question
         composer.showOverlay( "level1_question", { isModal = true, effect = "fade", time = 100})
 
@@ -333,6 +335,7 @@ function ResumeGame()
 
     -- make character visible again
     character.isVisible = true
+    print ("***ResumeGame: made character visible")
 
 
     if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
@@ -340,9 +343,6 @@ function ResumeGame()
         theZombie.isVisible = false
         physics.removeBody(theZombie)
     end
-
-        -- make character visible again
-    character.isVisible = true
 
 end
 ----------------------------------------------------------------------------------------

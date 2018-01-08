@@ -230,7 +230,7 @@ local function onCollision( self, event )
         character.isVisible = false
 
         -- show overlay with math question
-        composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
+        composer.showOverlay( "level3_question", { isModal = true, effect = "fade", time = 100})
 
         -- remove the character from the scene
         --display.remove(character)
@@ -346,7 +346,7 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function ResumeGame()
+function ResumeGame3()
 
     --updates lives
     lifeTaker()
