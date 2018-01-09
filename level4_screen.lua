@@ -20,7 +20,7 @@ local physics = require("physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_screen"
+sceneName = "level4_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ local backButton
 -----------------------------------------------------------------------------------------
 
 local function WinTransition( )
-    composer.gotoScene( "you_win2", {effect = "fromBottom", time = 500})
+    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
 end
 
 
@@ -200,7 +200,7 @@ local function MakeHeartsVisible()
 end
 
 local function YouLoseTransition()
-    composer.gotoScene( "you_lose2" )
+    composer.gotoScene( "you_lose" )
 end
 
 local function LevelTransition( )
@@ -230,7 +230,7 @@ local function onCollision( self, event )
         character.isVisible = false
 
         -- show overlay with math question
-        composer.showOverlay( "level2_question", { isModal = true, effect = "fade", time = 100})
+        composer.showOverlay( "level4_question", { isModal = true, effect = "fade", time = 100})
 
         -- remove the character from the scene
         --display.remove(character)
@@ -346,25 +346,25 @@ end
 -- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-function ResumeGameLevel2()
-    function ResumeGame2()
+function ResumeGame3()
 
-       --updates lives
-       lifeTaker()
+    --updates lives
+    lifeTaker()
 
-       --character back to initial pos
+    --character back to initial pos
 
-       -- make character visible again
-       character.isVisible = true
+    -- make character visible again
+    character.isVisible = true
 
 
-         if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
-            print ("***Removed theZombie " .. theZombie.myName)
-            theZombie.isVisible = false
-            physics.removeBody(theZombie)
-         end
-     end
+    if (theZombie ~= nil) and (theZombie.isBodyActive == true) then
+        print ("***Removed theZombie " .. theZombie.myName)
+        theZombie.isVisible = false
+        physics.removeBody(theZombie)
+    end
+
 end
+
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -378,7 +378,7 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Insert the background image
-    bkg_image = display.newImageRect("Images/Level2Background.png", display.contentWidth, display.contentHeight)
+    bkg_image = display.newImageRect("Images/Level4.png", display.contentWidth, display.contentHeight)
     bkg_image.x = display.contentWidth / 2
     bkg_image.y = display.contentHeight / 2
 

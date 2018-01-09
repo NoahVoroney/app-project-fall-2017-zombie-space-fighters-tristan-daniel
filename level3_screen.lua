@@ -97,7 +97,7 @@ local backButton
 -----------------------------------------------------------------------------------------
 
 local function WinTransition( )
-    composer.gotoScene( "main_menu", {effect = "fromBottom", time = 500})
+    composer.gotoScene( "level4_screen", {effect = "fromBottom", time = 500})
 end
 
 
@@ -203,7 +203,7 @@ local function YouLoseTransition()
     composer.gotoScene( "you_lose" )
 end
 
-local function LevelTransition( )
+local function Leve4Transition( )
     composer.gotoScene( "you_win" )
 
     --audio.stop ( mmMusicChannel)
@@ -213,7 +213,7 @@ local function LevelTransition( )
     --youWinSoundChannel = audio.play(youWinSound)
 
     --go to the main menu for now
-    composer.gotoScene( "main_menu" )
+    composer.gotoScene( "level4_screen" )
 end
 
 local function onCollision( self, event )
